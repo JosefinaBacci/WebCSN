@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useEffect } from "react";
+import logoImage from "../images/logo.png";
 import "./Navbar.css";
 
 
@@ -70,7 +71,9 @@ export default function Navbar() {
             <nav className="navbar navbar-simple">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo">
-                        <span className="logo-icon">🎓</span>
+                        <span className="logo-icon">
+                            <img src={logoImage} alt="Logo" className="navbar-logo-img"/>
+                        </span>
                         Colegio Nuevo Sol
                     </Link>
                     <Link to="/login" className="navbar-login-btn">
@@ -86,7 +89,9 @@ export default function Navbar() {
             <nav className="navbar navbar-simple">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo">
-                        <span className="logo-icon">🎓</span>
+                        <span className="logo-icon">
+                            <img src={logoImage} alt="Logo" className="navbar-logo-img"/>
+                        </span>
                         Colegio Nuevo Sol
                     </Link>
                     <button onClick={handleLogout} className="navbar-logout-btn">
@@ -99,10 +104,12 @@ export default function Navbar() {
 
     if(isAdminPage && isLoggedIn && isAdmin) {
         return (
-            <nav className="navbar navbar-admin">
+            <nav className="navbar navbar-simple">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo">
-                        <span className="logo-icon">🎓</span>
+                        <span className="logo-icon">
+                            <img src={logoImage} alt="Logo" className="navbar-logo-img"/>
+                        </span>
                         Colegio Nuevo Sol
                     </Link>
                     <button onClick={handleLogout} className="navbar-logout-btn">
@@ -117,7 +124,9 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="navbar-container">
                 <Link to="/" className="navbar-logo">
-                    <span className="logo-icon">🎓</span>
+                    <span className="logo-icon">
+                        <img src={logoImage} alt="Logo" className="navbar-logo-img"/>
+                    </span>
                     Colegio Nuevo Sol
                 </Link>
                 <button 

@@ -1,4 +1,5 @@
 import "./Hero.css";
+import sunImage from "../images/sun.png";
 
 export default function Hero() {
     return (
@@ -9,7 +10,7 @@ export default function Hero() {
                 <button className="hero-btn">Conoce Más</button>
             </div>
             <div className="hero-image">
-                <div className="hero-placeholder">☀️</div>
+                <img src={sunImage} alt="Sol" className="hero-placeholder" />
             </div>
         </section>
     );

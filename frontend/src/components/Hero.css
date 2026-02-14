@@ -98,9 +98,12 @@
 }
 
 .hero-placeholder {
-    font-size: 8rem;
-    animation: float 3s ease-in-out infinite, 1.5s ease-in-out infinite;
+    width: 250px;
+    height: 250px;
+    animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 10px 25px rgba(255, 226, 121, 0.3));
+    object-fit: contain;
+    mix-blend-mode: lighten;
 }
 
 @keyframes slideInHero {
@@ -179,6 +182,7 @@
     }
 
     .hero-placeholder {
-        font-size: 5rem;
+        width: 150px;
+        height: 150px;
     }
 }

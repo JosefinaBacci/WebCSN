@@ -6,6 +6,8 @@
     z-index: 100;
 }
 
+
+
 .navbar.navbar-simple .navbar-container {
     justify-content: space-between;
 }
@@ -54,6 +56,15 @@
 
 .logo-icon {
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-logo-img {
+    height: 75px;
+    width: auto;
+    object-fit: contain;
 }
 
 .navbar-menu {
@@ -232,6 +243,14 @@
 
     .logo-icon {
         font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .navbar-logo-img {
+        height: 35px;
+        width: auto;
     }
 
     .logo-text {
@@ -268,6 +287,14 @@
 
     .logo-icon {
         font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .navbar-logo-img {
+        height: 30px;
+        width: auto;
     }
 
     .navbar-login-btn {
