@@ -11,6 +11,7 @@ export default function Navbar() {
     const isLoggedIn = !!token;
     const isAdmin = role === "admin";
     const isAnnouncementsPage = pathname === "/announcements";
+    const isAdminPage = pathname === "/admin";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hasPendingRequests, setHasPendingRequests] = useState(false);
 
@@ -83,6 +84,22 @@ export default function Navbar() {
     if (isAnnouncementsPage && isLoggedIn) {
         return (
             <nav className="navbar navbar-simple">
+                <div className="navbar-container">
+                    <Link to="/" className="navbar-logo">
+                        <span className="logo-icon">🎓</span>
+                        Colegio Nuevo Sol
+                    </Link>
+                    <button onClick={handleLogout} className="navbar-logout-btn">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </nav>
+        );
+    }
+
+    if(isAdminPage && isLoggedIn && isAdmin) {
+        return (
+            <nav className="navbar navbar-admin">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo">
                         <span className="logo-icon">🎓</span>
