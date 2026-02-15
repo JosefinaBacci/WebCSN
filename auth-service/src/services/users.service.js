@@ -18,6 +18,10 @@ export async function getUserByEmail(email) {
         );
         return res.data;
     } catch (error) {
+        if (error.response?.status === 404) {
+            console.log(`Usuario no encontrado: ${email}`);
+            return null;
+        }
         console.error(`Error conectando a ${USERS_SERVICE_URL}:`, error.message);
         throw error;
     }
