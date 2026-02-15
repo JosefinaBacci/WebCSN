@@ -5,12 +5,14 @@ import { startStorageConsumer } from "./consumer.js";
 
 dotenv.config();
 
+const PORT = process.env.PORT || 4004;
+
 async function start() {
     await connectMongo(process.env.MONGO_URI);
     await startStorageConsumer(process.env.RABBIT_URL);
 
-    app.listen(4004, () => {
-        console.log("Storage service HTTP running on 4004");
+    app.listen(PORT, () => {
+        console.log(`Storage service HTTP running on ${PORT}`);
     });
 }
 
