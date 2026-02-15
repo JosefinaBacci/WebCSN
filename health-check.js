@@ -1,26 +1,24 @@
-
 import axios from "axios";
-
 const SERVICES = [
     {
         name: "Auth Service",
-        url: process.env.AUTH_SERVICE_URL || "https://webcsn-auth-service.onrender.com/health"
+        url: "https://webcsn-auth-service.onrender.com/health"
     },
     {
         name: "Users Service",
-        url: process.env.USERS_SERVICE_URL ? `${process.env.USERS_SERVICE_URL}/health` : "https://webcsn-users-service.onrender.com/health"
+        url: "https://webcsn-users-service.onrender.com/health"
     },
     {
         name: "Content Service",
-        url: process.env.CONTENT_SERVICE_URL ? `${process.env.CONTENT_SERVICE_URL}/health` : "https://webcsn-content-service.onrender.com/health"
+        url: "https://webcsn-content-service.onrender.com/health"
     },
     {
         name: "Storage Service",
-        url: process.env.STORAGE_SERVICE_URL ? `${process.env.STORAGE_SERVICE_URL}/health` : "https://webcsn-storage-service.onrender.com/health"
+        url: "https://webcsn-storage-service.onrender.com/health"
     },
     {
         name: "Notification Service",
-        url: process.env.NOTIFICATION_SERVICE_URL ? `${process.env.NOTIFICATION_SERVICE_URL}/health` : "https://webcsn-notification-service.onrender.com/health"
+        url: "https://webcsn-notification-service.onrender.com/health"
     }
 ];
 
