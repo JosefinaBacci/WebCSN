@@ -8,9 +8,12 @@ import notificationsRoutes from "./routes/notifications.routes.js";
 const app = express();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [
+        "https://web-kbbos5wio-josefinabaccis-projects.vercel.app",
+        "https://web-csn.vercel.app"
+    ],
     credentials: true
-}))
+}));
 app.use(express.json());
 
 app.use("/auth", authRoutes);
