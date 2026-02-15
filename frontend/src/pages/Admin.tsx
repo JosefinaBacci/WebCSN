@@ -7,6 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 export default function Admin() {
     const { token } = useAuth();
     const [pendingUsers, setPendingUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchPending = async () => {
         try {
@@ -20,6 +21,8 @@ export default function Admin() {
         setPendingUsers(data);
         } catch (err) {
         console.error(err);
+        } finally {
+        setIsLoading(false);
         }
     };
 
@@ -56,9 +59,11 @@ export default function Admin() {
         <div className="admin-container">
         <h2>Solicitudes Pendientes</h2>
 
-        {pendingUsers.length === 0 && <p>No hay solicitudes.</p>}
+        {isLoading && <p className="loading-text">Cargando solicitudes...</p>}
 
-        {pendingUsers.map((user: any) => (
+        {!isLoading && pendingUsers.length === 0 && <p>No hay solicitudes.</p>}
+
+        {!isLoading && pendingUsers.map((user: any) => (
             <div key={user._id} className="request-card">
             <div className="user-info">
                 <div className="info-group">

@@ -17,3 +17,7 @@ export function getPending(token) {
 export function approve(id) {
     return axios.patch(`${USERS_URL}/users/${id}/approve`);
 }
+
+export function reject(id) {
+    return axios.patch(`${USERS_URL}/users/${id}/reject`);
+}

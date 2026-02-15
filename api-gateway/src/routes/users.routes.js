@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register, approve, getPending } from "../services/users.service.js";
+import { register, approve, getPending, reject } from "../services/users.service.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { authorize } from "../middlewares/role.middleware.js";
 
@@ -16,6 +16,16 @@ router.patch(
     authorize("admin"),
     async (req, res) => {
         const response = await approve(req.params.id);
+        res.json(response.data);
+    }
+);
+
+router.patch(
+    "/:id/reject",
+    authenticate,
+    authorize("admin"),
+    async (req, res) => {
+        const response = await reject(req.params.id);
         res.json(response.data);
     }
 );

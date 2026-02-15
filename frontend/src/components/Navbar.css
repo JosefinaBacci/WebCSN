@@ -193,11 +193,13 @@
         padding: var(--spacing-md);
         text-align: left;
         border-bottom: none;
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-base) !important;
+        font-weight: 500 !important;
         color: var(--dark);
         text-decoration: none;
         transition: background-color 0.3s ease;
         background: none;
+        border: none;
     }
 
     .navbar-menu button:hover,
@@ -230,6 +232,11 @@
         top: 50%;
         right: var(--spacing-md);
         transform: translateY(-50%);
+    }
+
+    .navbar-logout-btn {
+        padding: var(--spacing-xs) var(--spacing-sm) !important;
+        font-size: var(--font-size-sm) !important;
     }
 
     .navbar-logout-btn.desktop-logout {
