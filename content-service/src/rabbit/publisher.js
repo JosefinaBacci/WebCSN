@@ -21,14 +21,23 @@ export async function initRabbit() {
 }
 
 export function publish(event, data) {
-    channel.publish(
-        "school.events",
-        event,
-        Buffer.from(
-        JSON.stringify({
+    if (!channel) {
+        throw new Error("RabbitMQ channel not initialized");
+    }
+    
+    try {
+        channel.publish(
+            "school.events",
             event,
-            data
-        })
-        )
-    );
+            Buffer.from(
+            JSON.stringify({
+                event,
+                data
+            })
+            )
+        );
+    } catch (error) {
+        console.error("Error publishing to RabbitMQ:", error);
+        throw error;
+    }
 }
