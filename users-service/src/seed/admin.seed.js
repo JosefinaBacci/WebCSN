@@ -3,18 +3,21 @@ import User from "../models/User.js";
 
 export async function createAdmin() {
     try {
-        await User.deleteOne({ email: "admin@school.com" });
+        const adminEmail = process.env.ADMIN_EMAIL || "admin@school.com";
+        const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
 
-        const password = await bcrypt.hash("admin123", 10);
+        await User.deleteOne({ email: adminEmail });
+
+        const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
         await User.create({
             role: "admin",
-            email: "admin@school.com",
-            password,
+            email: adminEmail,
+            password: hashedPassword,
             status: "approved"
         });
 
-        console.log("Admin created with hashed password");
+        console.log(`Admin created: ${adminEmail}`);
     } catch (error) {
         console.error("Error creating admin:", error.message);
     }
