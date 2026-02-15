@@ -4,6 +4,8 @@ import { authorize } from "../middlewares/role.middleware.js";
 import { proxyToContentService } from "../proxy/proxy.js";
 import axios from "axios";
 
+
+const STORAGE_SERVICE_URL = process.env.STORAGE_SERVICE_URL;
 const router = Router();
 
 router.post(
@@ -18,7 +20,7 @@ router.get(
     authenticate,
     async (req, res) => {
         const response = await axios.get(
-        "http://storage-service:4004/announcements",
+        `${STORAGE_SERVICE_URL}/announcements`,
         { params: req.query }
         );
         res.json(response.data);
@@ -30,7 +32,7 @@ router.get(
     authenticate,
     async (req, res) => {
         const response = await axios.get(
-        `http://storage-service:4004/announcements/${req.params.id}`
+        `${STORAGE_SERVICE_URL}/announcements/${req.params.id}`
         );
         res.json(response.data);
     }

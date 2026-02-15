@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CONTENT_SERVICE_URL = "http://content-service:4003";
+const CONTENT_SERVICE_URL = process.env.CONTENT_SERVICE_URL
 
 export async function proxyToContentService(req, res) {
     try {

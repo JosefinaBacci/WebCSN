@@ -3,8 +3,7 @@ import axios from "axios";
 
 const router = Router();
 
-const NOTIFICATION_SERVICE_URL =
-    process.env.NOTIFICATION_SERVICE_URL || "http://notification-service:4005";
+const NOTIFICATION_SERVICE_URL = process.env.NOTIFICATION_SERVICE_URL 
 
 router.post("/contact-form", async (req, res) => {
     try {
