@@ -5,15 +5,32 @@ import { startStorageConsumer } from "./consumer.js";
 
 dotenv.config();
 
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 const PORT = process.env.PORT || 4004;
 
 async function start() {
-    await connectMongo(process.env.MONGO_URI);
-    await startStorageConsumer(process.env.RABBIT_URL);
+    try {
+        await connectMongo(process.env.MONGO_URI);
+        await startStorageConsumer(process.env.RABBIT_URL);
 
-    app.listen(PORT, () => {
-        console.log(`Storage service HTTP running on ${PORT}`);
-    });
+        const server = app.listen(PORT, () => {
+            console.log(`Storage service HTTP running on ${PORT}`);
+        });
+        
+        process.on('SIGTERM', () => {
+            console.log('SIGTERM signal received: closing HTTP server');
+            server.close(() => {
+                console.log('HTTP server closed');
+                process.exit(0);
+            });
+        });
+    } catch (err) {
+        console.error("Failed to start server:", err.message);
+        process.exit(1);
+    }
 }
 
 start();

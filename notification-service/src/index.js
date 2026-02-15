@@ -12,12 +12,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 app.use("/", contactFormRoutes);
 
 const PORT = process.env.PORT || 4005;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Notification service running on port ${PORT}`);
 });
 
 startConsumer().catch(console.error);
+
+process.on('SIGTERM', () => {
+    console.log('SIGTERM signal received: closing HTTP server');
+    server.close(() => {
+        console.log('HTTP server closed');
+        process.exit(0);
+    });
+});
