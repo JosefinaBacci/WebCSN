@@ -14,6 +14,8 @@ interface Announcement {
 
 const ITEMS_PER_PAGE = 4;
 const MAX_PREVIEW_LENGTH = 150;
+const API_URL = import.meta.env.VITE_API_URL;
+const WS_URL  = import.meta.env.VITE_WS_URL;
 
 export default function Announcements() {
     const { token, role } = useAuth();
@@ -35,7 +37,7 @@ export default function Announcements() {
 
         const fetchAnnouncements = async () => {
             try {
-                const response = await fetch("http://localhost:4000/announcements", {
+                const response = await fetch(`${API_URL}/announcements`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -61,7 +63,7 @@ export default function Announcements() {
     useEffect(() => {
         if (!token) return;
 
-        const socket = io("http://localhost:3001");
+        const socket = io(WS_URL);
 
         socket.on("new-announcement", (announcement: Announcement) => {
             setAnnouncements(prev => [announcement, ...prev]);
@@ -119,7 +121,7 @@ export default function Announcements() {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("http://localhost:4000/announcements", {
+            const response = await fetch(`${API_URL}/announcements`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

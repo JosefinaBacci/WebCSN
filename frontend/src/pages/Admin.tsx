@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import './Admin.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Admin() {
     const { token } = useAuth();
     const [pendingUsers, setPendingUsers] = useState([]);
 
     const fetchPending = async () => {
         try {
-        const res = await fetch("http://localhost:4000/users/pending", {
+        const res = await fetch(`${API_URL}/users/pending`, {
             headers: {
             Authorization: `Bearer ${token}`
             }
@@ -29,7 +31,7 @@ export default function Admin() {
     }, []);
 
     const handleApprove = async (id: string) => {
-        await fetch(`http://localhost:4000/users/${id}/approve`, {
+        await fetch(`${API_URL}/users/${id}/approve`, {
         method: "PATCH",
         headers: {
             Authorization: `Bearer ${token}`
@@ -40,7 +42,7 @@ export default function Admin() {
     };
 
     const handleReject = async (id: string) => {
-        await fetch(`http://localhost:4000/users/${id}/reject`, {
+        await fetch(`${API_URL}/users/${id}/reject`, {
         method: "PATCH",
         headers: {
             Authorization: `Bearer ${token}`

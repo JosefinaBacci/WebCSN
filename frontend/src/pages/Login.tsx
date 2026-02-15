@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Login() {
     const { login } = useAuth();
     const [formData, setFormData] = useState({
@@ -27,7 +29,7 @@ export default function Login() {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:4000/auth/login", {
+            const response = await fetch(`${API_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
