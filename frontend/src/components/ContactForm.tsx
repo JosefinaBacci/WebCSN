@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./ContactForm.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: "",
@@ -26,7 +28,7 @@ export default function ContactForm() {
         setLoading(true);
 
         try {
-            const response = await fetch("http://localhost:4000/notifications/contact-form", {
+            const response = await fetch(`${API_URL}/notifications/contact-form`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

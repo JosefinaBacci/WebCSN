@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import logoImage from "../images/logo.png";
 import "./Navbar.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Navbar() {
     const { token, role, logout } = useAuth();
@@ -21,7 +22,7 @@ export default function Navbar() {
 
         const fetchPending = async () => {
             try {
-                const res = await fetch("http://localhost:4000/users/pending", {
+                const res = await fetch(`${API_URL}/users/pending`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
