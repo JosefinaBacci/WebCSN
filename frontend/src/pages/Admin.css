@@ -59,16 +59,21 @@
     display: flex;
     gap: 0.40rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .info-group-row p {
     width: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .info-group p {
     margin: var(--spacing-xs) 0;
     color: var(--dark);
     font-size: var(--font-size-base);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .info-group strong {
@@ -80,6 +85,8 @@
     background: var(--gray);
     padding: var(--spacing-md);
     border-radius: 0.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .children-info p {
@@ -153,4 +160,73 @@
 @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) auto;
+    }
+
+    .admin-container h2 {
+        font-size: var(--font-size-xl);
+        margin-bottom: 1.5rem;
+    }
+
+    .request-card {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+
+    .info-group-row {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        align-items: flex-start;
+    }
+
+    .info-group-row p {
+        word-break: break-word;
+        width: 100%;
+        overflow-wrap: break-word;
+    }
+
+    .info-group p {
+        font-size: var(--font-size-sm);
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .children-info {
+        padding: var(--spacing-sm);
+    }
+
+    .children-info p {
+        font-size: var(--font-size-sm);
+    }
+
+    .children-info li {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-xs) 0;
+        padding-left: var(--spacing-md);
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        justify-content: stretch;
+        margin-top: var(--spacing-sm);
+    }
+
+    .approve-btn,
+    .reject-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+        width: 100%;
+    }
+
+    .admin-container > p,
+    .loading-text {
+        font-size: var(--font-size-base);
+    }
 }
