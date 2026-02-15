@@ -2,6 +2,8 @@ import amqp from "amqplib";
 import axios from "axios";
 import { transporter } from "../mail/mailer.js";
 
+const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL;
+
 async function connectWithRetry() {
     while (true) {
         try {
@@ -41,7 +43,7 @@ export async function startConsumer() {
         console.log("New announcement received:", announcement.title);
 
         const usersResponse = await axios.get(
-        "http://users-service:4002/users/approved"
+        `${USERS_SERVICE_URL}/users/approved`
         );
 
         const users = usersResponse.data;
