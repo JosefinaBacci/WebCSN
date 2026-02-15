@@ -9,11 +9,10 @@ const app = express();
 
 app.use(cors({
     origin: [
-        "https://web-kbbos5wio-josefinabaccis-projects.vercel.app",
-        "https://web-csn.vercel.app"
+        process.env.FRONTEND_URL
     ],
     credentials: true
-}));
+}))
 app.use(express.json());
 
 app.use("/auth", authRoutes);
