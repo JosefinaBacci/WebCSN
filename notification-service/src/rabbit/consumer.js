@@ -1,6 +1,6 @@
 import amqp from "amqplib";
 import axios from "axios";
-import { transporter } from "../mail/resend.js";
+import { resend } from "../mail/resend.js";
 
 const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL;
 
@@ -62,7 +62,7 @@ export async function startConsumer() {
 
                 for (const user of users) {
                     try {
-                        await transporter.sendMail({
+                        await resend.emails.send({
                             from: '"Colegio Nuevo Sol" <colegionuevosolzapala@gmail.com>',
                             to: user.email,
                             subject: `📢 Nuevo comunicado: ${announcement.title}`,
