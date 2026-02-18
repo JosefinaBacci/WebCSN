@@ -1,6 +1,6 @@
 import amqp from "amqplib";
 import axios from "axios";
-import { transporter } from "../mail/mailer.js";
+import { transporter } from "../mail/resend.js";
 
 const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL;
 
