@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { transporter } from "../mail/mailer.js";
+import { resend } from "../mail/resend.js";
 
 const router = Router();
 
@@ -11,10 +11,10 @@ router.post("/contact-form", async (req, res) => {
     }
 
     try {
-        await transporter.sendMail({
-            from: '"Colegio Nuevo Sol" <colegionuevosolzapala@gmail.com>',
+        await resend.emails.send({
+            from: "Colegio Nuevo Sol <onboarding@resend.dev>",
             to: "colegionuevosolzapala@gmail.com",
-            replyTo: email,
+            reply_to: email,
             subject: `Consulta web – ${level}`,
             html: `
                 <h3>Nueva consulta desde la web</h3>
