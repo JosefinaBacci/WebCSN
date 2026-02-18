@@ -3,8 +3,8 @@ import User from "../models/User.js";
 
 export async function createAdmin() {
     try {
-        const adminEmail = process.env.ADMIN_EMAIL || "admin@school.com";
-        const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
 
         await User.deleteOne({ email: adminEmail });
 
