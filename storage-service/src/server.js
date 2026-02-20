@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import app from "./app.js";
 import { connectMongo } from "./mongo.js";
 import { startStorageConsumer } from "./consumer.js";
+import { startAnnouncementCleanup } from "./cleanup.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ async function start() {
     try {
         await connectMongo(process.env.MONGO_URI);
         await startStorageConsumer(process.env.RABBIT_URL);
+        await startAnnouncementCleanup();
 
         const server = app.listen(PORT, () => {
             console.log(`Storage service HTTP running on ${PORT}`);

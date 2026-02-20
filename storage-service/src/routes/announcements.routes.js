@@ -40,4 +40,16 @@ router.get("/announcements/:id", async (req, res) => {
     res.json(announcement);
 });
 
+router.delete("/announcements/:id", async (req, res) => {
+    const result = await Announcement.deleteOne({
+        announcementId: req.params.id
+    });
+
+    if (result.deletedCount === 0) {
+        return res.status(404).json({ message: "Announcement not found" });
+    }
+
+    res.json({ message: "Announcement deleted successfully" });
+});
+
 export default router;
