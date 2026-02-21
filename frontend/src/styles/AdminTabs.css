@@ -44,7 +44,6 @@
     }
 }
 
-/* History Container */
 .history-container {
     margin-top: var(--spacing-lg);
 }
@@ -119,23 +118,21 @@
 }
 
 .status-badge.approved {
-    background: #c8e6c9;
+    border-color: #c8e6c9;
 }
 
 .status-badge.rejected {
-    background: #ffcdd2;
+    border-color: #ffcdd2;
 }
 
 .status-badge.pending {
-    background: #ffe0b2;
+    border-color: #ffe0b2;
 }
 
 .arrow {
     color: var(--gray-dark);
     font-weight: bold;
 }
-
-
 
 .reason-cell {
     color: var(--dark);
@@ -150,7 +147,6 @@
     white-space: nowrap;
 }
 
-/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -188,7 +184,6 @@
     text-align: center;
 }
 
-/* Managed Users Container */
 .managed-users-container {
     margin-top: var(--spacing-lg);
 }
@@ -387,7 +382,7 @@
 .loading-text {
     text-align: center;
     color: var(--gray-dark);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     font-weight: 500;
     animation: pulse 1.5s ease-in-out infinite;
 }

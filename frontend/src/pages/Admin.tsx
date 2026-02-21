@@ -104,25 +104,25 @@ export default function Admin() {
                     className={`tab-btn ${activeTab === "pending" ? "active" : ""}`}
                     onClick={() => setActiveTab("pending")}
                 >
-                    📋 Pendientes
+                    Pendientes
                 </button>
                 <button
                     className={`tab-btn ${activeTab === "approved" ? "active" : ""}`}
                     onClick={() => setActiveTab("approved")}
                 >
-                    ✅ Aceptados
+                    Aceptados
                 </button>
                 <button
                     className={`tab-btn ${activeTab === "rejected" ? "active" : ""}`}
                     onClick={() => setActiveTab("rejected")}
                 >
-                    ❌ Rechazados
+                    Rechazados
                 </button>
                 <button
                     className={`tab-btn ${activeTab === "history" ? "active" : ""}`}
                     onClick={() => setActiveTab("history")}
                 >
-                    📊 Historial
+                    Historial
                 </button>
             </div>
 
