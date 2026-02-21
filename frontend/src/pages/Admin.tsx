@@ -2,74 +2,96 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import UserStatusHistory from "../components/UserStatusHistory";
 import ManagedUsers from "../components/ManagedUsers";
+import { userService } from "../api/userService";
+import io from "socket.io-client";
 import './Admin.css';
 import '../styles/AdminTabs.css';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const WS_URL = import.meta.env.VITE_WS_URL;
 
 type TabType = "pending" | "approved" | "rejected" | "history";
+
+interface User {
+    _id: string;
+    email: string;
+    profile?: {
+        name: string;
+        lastname: string;
+        children?: Array<{ name: string; grade: string }>;
+    };
+}
 
 export default function Admin() {
     const { token } = useAuth();
     const [activeTab, setActiveTab] = useState<TabType>("pending");
-    const [pendingUsers, setPendingUsers] = useState([]);
+    const [pendingUsers, setPendingUsers] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchPending = async () => {
+        if (!token) return;
         try {
             setIsLoading(true);
-            const res = await fetch(`${API_URL}/users/pending`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            const data = await res.json();
-            setPendingUsers(data);
+            const data = await userService.getPending(token);
+            setPendingUsers(data || []);
         } catch (err) {
-            console.error(err);
+            console.error("Error fetching pending users:", err);
+            setPendingUsers([]);
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        if (activeTab === "pending") {
+        if (activeTab === "pending" && token) {
             fetchPending();
-            const interval = setInterval(fetchPending, 5000);
-            return () => clearInterval(interval);
+
+            const socket = io(WS_URL, {
+                reconnection: true,
+                reconnectionDelay: 1000,
+                reconnectionDelayMax: 5000,
+                reconnectionAttempts: 5
+            });
+
+            socket.on("new-pending-user", (newUser) => {
+                console.log("New pending user received:", newUser);
+                setPendingUsers((prev) => [newUser, ...prev]);
+            });
+
+            socket.on("user-approved", (userId) => {
+                console.log("User approved:", userId);
+                setPendingUsers((prev) => prev.filter((u: any) => u._id !== userId));
+            });
+
+            socket.on("user-rejected", (userId) => {
+                console.log("User rejected:", userId);
+                setPendingUsers((prev) => prev.filter((u: any) => u._id !== userId));
+            });
+
+            return () => {
+                socket.disconnect();
+            };
         }
-    }, [activeTab]);
+    }, [activeTab, token]);
 
     const handleApprove = async (id: string, reason?: string) => {
+        if (!token) return;
         try {
-            await fetch(`${API_URL}/users/${id}/approve`, {
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ reason })
-            });
-            fetchPending();
+            await userService.approveUser(id, token, reason);
+            setPendingUsers((prev) => prev.filter((u: any) => u._id !== id));
         } catch (err) {
-            console.error(err);
+            console.error("Error approving user:", err);
+            alert("Error al aceptar usuario");
         }
     };
 
     const handleReject = async (id: string, reason?: string) => {
+        if (!token) return;
         try {
-            await fetch(`${API_URL}/users/${id}/reject`, {
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ reason })
-            });
-            fetchPending();
+            await userService.rejectUser(id, token, reason);
+            setPendingUsers((prev) => prev.filter((u: any) => u._id !== id));
         } catch (err) {
-            console.error(err);
+            console.error("Error rejecting user:", err);
+            alert("Error al rechazar usuario");
         }
     };
 

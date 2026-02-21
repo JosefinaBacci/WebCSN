@@ -14,10 +14,58 @@ export function getPending(token) {
     });
 }
 
-export function approve(id) {
-    return axios.patch(`${USERS_URL}/users/${id}/approve`);
+export function getApproved(token) {
+    return axios.get(`${USERS_URL}/users/approved`, {
+        headers: {
+            Authorization: token
+        }
+    });
 }
 
-export function reject(id) {
-    return axios.patch(`${USERS_URL}/users/${id}/reject`);
+export function getRejected(token) {
+    return axios.get(`${USERS_URL}/users/rejected`, {
+        headers: {
+            Authorization: token
+        }
+    });
+}
+
+export function getUserStatusHistory(userId, token) {
+    return axios.get(`${USERS_URL}/users/${userId}/history`, {
+        headers: {
+            Authorization: token
+        }
+    });
+}
+
+export function getAllStatusHistory(token, page = 1, limit = 20) {
+    return axios.get(`${USERS_URL}/users/admin/history-all?page=${page}&limit=${limit}`, {
+        headers: {
+            Authorization: token
+        }
+    });
+}
+
+export function updateUserStatus(userId, data, token) {
+    return axios.patch(`${USERS_URL}/users/${userId}/status`, data, {
+        headers: {
+            Authorization: token
+        }
+    });
+}
+
+export function approve(id, token) {
+    return axios.patch(`${USERS_URL}/users/${id}/approve`, {}, {
+        headers: {
+            Authorization: token
+        }
+    });
+}
+
+export function reject(id, token) {
+    return axios.patch(`${USERS_URL}/users/${id}/reject`, {}, {
+        headers: {
+            Authorization: token
+        }
+    });
 }

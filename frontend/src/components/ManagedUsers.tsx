@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
+import { userService } from "../api/userService";
 import '../styles/AdminTabs.css';
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 interface User {
     _id: string;
     email: string;
-    role: string;
-    status: "pending" | "approved" | "rejected";
     profile?: {
-        name?: string;
-        lastname?: string;
+        name: string;
+        lastname: string;
         children?: Array<{ name: string; grade: string }>;
     };
 }
@@ -29,48 +26,36 @@ export default function ManagedUsers({ token, status, title }: Props) {
     const [reasonText, setReasonText] = useState<{ [key: string]: string }>({});
 
     const fetchUsers = async () => {
+        if (!token) return;
         try {
             setIsLoading(true);
-            const endpoint = status === "approved" ? "/users/approved" : "/users/rejected";
-            const res = await fetch(`${API_URL}${endpoint}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            const data = await res.json();
-            setUsers(data);
+            const data = status === "approved" 
+                ? await userService.getApproved(token)
+                : await userService.getRejected(token);
+            setUsers(data || []);
         } catch (err) {
             console.error("Error fetching users:", err);
+            setUsers([]);
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchUsers();
-    }, [status]);
+        if (token) {
+            fetchUsers();
+        }
+    }, [status, token]);
 
     const handleStatusChange = async (userId: string, newStatus: "approved" | "rejected") => {
+        if (!token) return;
         try {
             setChangingStatus(userId);
             const reason = reasonText[userId] || "";
 
-            const res = await fetch(`${API_URL}/users/${userId}/status`, {
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ newStatus, reason })
-            });
-
-            if (res.ok) {
-                setReasonText(prev => ({ ...prev, [userId]: "" }));
-                fetchUsers();
-            } else {
-                alert("Error al cambiar el estado del usuario");
-            }
+            await userService.updateUserStatus(userId, newStatus, token, reason);
+            setReasonText(prev => ({ ...prev, [userId]: "" }));
+            fetchUsers();
         } catch (err) {
             console.error("Error changing status:", err);
             alert("Error al cambiar el estado del usuario");

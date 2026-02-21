@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
+import { userService } from "../api/userService";
 import '../styles/AdminTabs.css';
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 interface HistoryEntry {
     _id: string;
@@ -29,31 +28,26 @@ export default function UserStatusHistory({ token }: { token: string }) {
     const limit = 15;
 
     const fetchHistory = async (page: number = 1) => {
+        if (!token) return;
         try {
             setIsLoading(true);
-            const res = await fetch(
-                `${API_URL}/users/admin/history-all?page=${page}&limit=${limit}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
-
-            const data = await res.json();
-            setHistory(data.data);
+            const data = await userService.getAllStatusHistory(token, page, limit);
+            setHistory(data.data || []);
             setPagination(data.pagination);
             setCurrentPage(page);
         } catch (err) {
             console.error("Error fetching history:", err);
+            setHistory([]);
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchHistory(1);
-    }, []);
+        if (token) {
+            fetchHistory(1);
+        }
+    }, [token]);
 
     const getStatusBadgeClass = (status: string) => {
         switch (status) {
