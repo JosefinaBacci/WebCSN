@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import UserStatusHistory from "../components/UserStatusHistory";
 import ManagedUsers from "../components/ManagedUsers";
 import { userService } from "../api/userService";
@@ -23,9 +24,17 @@ interface User {
 
 export default function Admin() {
     const { token } = useAuth();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<TabType>("pending");
     const [pendingUsers, setPendingUsers] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    // Proteger página - redirigir si no hay token
+    useEffect(() => {
+        if (!token) {
+            navigate("/", { replace: true });
+        }
+    }, [token, navigate]);
 
     const fetchPending = async () => {
         if (!token) return;
@@ -97,6 +106,10 @@ export default function Admin() {
 
     return (
         <div className="admin-container">
+            {!token ? (
+                <p className="loading-text">Redirigiendo...</p>
+            ) : (
+                <>
             <h2>Panel de Administración</h2>
 
             <div className="admin-tabs">
@@ -203,6 +216,8 @@ export default function Admin() {
                 <div className="tab-content">
                     <UserStatusHistory token={token} />
                 </div>
+            )}
+            </>
             )}
         </div>
     );

@@ -110,23 +110,25 @@
 .status-badge {
     display: inline-block;
     padding: 2px 6px;
+    border: 1px solid;
     border-radius: 3px;
     font-size: 0.7rem;
     font-weight: 500;
     color: var(--dark);
     text-transform: uppercase;
+    background: transparent;
 }
 
 .status-badge.approved {
-    border-color: #c8e6c9;
+    border-color: #4caf50;
 }
 
 .status-badge.rejected {
-    border-color: #ffcdd2;
+    border-color: #f44336;
 }
 
 .status-badge.pending {
-    border-color: #ffe0b2;
+    border-color: #ff9800;
 }
 
 .arrow {
@@ -382,14 +384,16 @@
 .loading-text {
     text-align: center;
     color: var(--gray-dark);
-    font-size: var(--font-size-sm);
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 400;
     animation: pulse 1.5s ease-in-out infinite;
 }
 
 @media (max-width: 768px) {
     .admin-tabs {
         gap: var(--spacing-sm);
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .tab-btn {
@@ -398,23 +402,22 @@
     }
 
     .history-table-wrapper {
-        font-size: var(--font-size-sm);
+        overflow-x: auto;
     }
 
     .history-table th,
     .history-table td {
-        padding: var(--spacing-sm);
-    }
-
-    .status-change-cell {
-        flex-direction: column;
-        gap: var(--spacing-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.75rem;
     }
 
     .user-card-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--spacing-sm);
+    }
+
+    .expand-btn {
+        align-self: flex-start;
     }
 
     .status-buttons {
@@ -426,11 +429,12 @@
     }
 
     .pagination {
-        flex-direction: column;
-        gap: var(--spacing-sm);
+        flex-wrap: wrap;
     }
 
     .pagination-btn {
-        width: 100%;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
     }
 }
+
