@@ -112,11 +112,14 @@ export default function Login() {
                                 <input
                                     type="checkbox"
                                     id="rememberMe"
+                                    name="rememberMe"
                                     checked={rememberMe}
                                     onChange={(e) => setRememberMe(e.target.checked)}
                                     disabled={loading}
                                 />
-                                <label htmlFor="rememberMe">Mantener sesión iniciada en este dispositivo</label>
+                                <label htmlFor="rememberMe">
+                                    Mantener sesión iniciada
+                                </label>
                             </div>
 
                             <button type="submit" className="login-btn" disabled={loading}>
