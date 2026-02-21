@@ -113,11 +113,13 @@ export async function reject(req, res) {
 }
 
 export async function approved(req, res) {
-    const users = await User.find(
-        { status: "approved" },
-        { email: 1, role: 1 } 
-    );
-    res.json(users);
+    try {
+        const users = await User.find({ status: "approved" });
+        res.json(users);
+    } catch (error) {
+        console.error("GET APPROVED ERROR:", error);
+        res.status(500).json({ message: "Error al obtener usuarios aprobados" });
+    }
 }
 
 export async function getUserStatusHistory(req, res) {

@@ -55,7 +55,8 @@ export default function ManagedUsers({ token, status, title }: Props) {
 
             await userService.updateUserStatus(userId, newStatus, token, reason);
             setReasonText(prev => ({ ...prev, [userId]: "" }));
-            fetchUsers();
+            // Filtrar el usuario del estado local en lugar de recargar
+            setUsers(prev => prev.filter(u => u._id !== userId));
         } catch (err) {
             console.error("Error changing status:", err);
             alert("Error al cambiar el estado del usuario");

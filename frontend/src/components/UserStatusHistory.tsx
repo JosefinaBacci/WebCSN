@@ -85,7 +85,6 @@ export default function UserStatusHistory({ token }: { token: string }) {
                                 <tr>
                                     <th>Email</th>
                                     <th>Cambio</th>
-                                    <th>Cambió por</th>
                                     <th>Razón</th>
                                     <th>Fecha</th>
                                 </tr>
@@ -103,7 +102,6 @@ export default function UserStatusHistory({ token }: { token: string }) {
                                                 {getStatusText(entry.newStatus)}
                                             </span>
                                         </td>
-                                        <td className="changed-by-cell">{entry.changedBy}</td>
                                         <td className="reason-cell">{entry.reason || '-'}</td>
                                         <td className="date-cell">
                                             {new Date(entry.changedAt).toLocaleDateString('es-ES')} {' '}
