@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { userService } from "../api/userService";
-import './AdminTabs.css';
+import '../styles/AdminTabs.css';
 
 interface User {
     _id: string;
