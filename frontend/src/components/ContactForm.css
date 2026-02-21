@@ -7,7 +7,6 @@
     animation: fadeIn 0.6s ease-out;
 }
 
-/* Info Cards */
 .contact-info {
     display: flex;
     flex-direction: column;
@@ -117,6 +116,8 @@
     background-color: var(--light);
     color: var(--dark);
     position: relative;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .form-group input::placeholder,
@@ -262,6 +263,22 @@
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+    .contact-form-wrapper {
+        max-width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+
+    .contact-form {
+        padding: var(--spacing-md);
+    }
+
+    .form-row {
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
 @media (max-width: 1024px) {
     .contact-form-wrapper {
         grid-template-columns: 1fr;

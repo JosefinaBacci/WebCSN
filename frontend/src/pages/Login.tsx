@@ -11,6 +11,7 @@ export default function Login() {
         email: "",
         password: ""
     });
+    const [rememberMe, setRememberMe] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function Login() {
 
             if (response.ok) {
                 const data = await response.json();
-                login(data.token, data.role);
+                login(data.token, data.role, rememberMe);
                 navigate("/");
             } else if(response.status === 401) {
                 setError("Email o contraseña inválidos");
@@ -101,6 +102,16 @@ export default function Login() {
                                     placeholder="••••••••"
                                     required
                                 />
+                            </div>
+
+                            <div className="form-group checkbox-group">
+                                <input
+                                    type="checkbox"
+                                    id="rememberMe"
+                                    checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}
+                                />
+                                <label htmlFor="rememberMe">Mantener sesión iniciada en este dispositivo</label>
                             </div>
 
                             <button type="submit" className="login-btn" disabled={loading}>
