@@ -42,12 +42,14 @@ export default function Login() {
                 const data = await response.json();
                 login(data.token, data.role, rememberMe);
                 navigate("/");
-            } else if(response.status === 401) {
+            } else if (response.status === 401) {
                 setError("Email o contraseña inválidos");
-            }else if(response.status === 404){
+            } else if (response.status === 404) {
                 setError("Usuario no encontrado");
-            } else if(response.status === 403) {
+            } else if (response.status === 403) {
                 setError("Tu cuenta aún no fue aprobada por el colegio.");
+            } else {
+                setError("Error al iniciar sesión. Intenta de nuevo.");
             }
         } catch (err) {
             setError("Error al conectar con el servidor");
@@ -88,6 +90,7 @@ export default function Login() {
                                     onChange={handleChange}
                                     placeholder="tu@email.com"
                                     required
+                                    disabled={loading}
                                 />
                             </div>
 
@@ -101,6 +104,7 @@ export default function Login() {
                                     onChange={handleChange}
                                     placeholder="••••••••"
                                     required
+                                    disabled={loading}
                                 />
                             </div>
 
@@ -110,6 +114,7 @@ export default function Login() {
                                     id="rememberMe"
                                     checked={rememberMe}
                                     onChange={(e) => setRememberMe(e.target.checked)}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="rememberMe">Mantener sesión iniciada en este dispositivo</label>
                             </div>

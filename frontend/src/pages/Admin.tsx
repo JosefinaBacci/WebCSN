@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import UserStatusHistory from "../components/UserStatusHistory";
 import ManagedUsers from "../components/ManagedUsers";
 import { userService } from "../api/userService";
@@ -24,26 +23,22 @@ interface User {
 
 export default function Admin() {
     const { token } = useAuth();
-    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<TabType>("pending");
     const [pendingUsers, setPendingUsers] = useState<User[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    // Proteger página - redirigir si no hay token
-    useEffect(() => {
-        if (!token) {
-            navigate("/", { replace: true });
-        }
-    }, [token, navigate]);
+    const [error, setError] = useState<string | null>(null);
 
     const fetchPending = async () => {
         if (!token) return;
         try {
             setIsLoading(true);
+            setError(null);
             const data = await userService.getPending(token);
             setPendingUsers(data || []);
         } catch (err) {
             console.error("Error fetching pending users:", err);
+            const errorMsg = err instanceof Error ? err.message : "Error al cargar solicitudes";
+            setError(errorMsg);
             setPendingUsers([]);
         } finally {
             setIsLoading(false);
@@ -89,7 +84,8 @@ export default function Admin() {
             setPendingUsers((prev) => prev.filter((u: any) => u._id !== id));
         } catch (err) {
             console.error("Error approving user:", err);
-            alert("Error al aceptar usuario");
+            const errorMsg = err instanceof Error ? err.message : "Error al aceptar usuario";
+            setError(errorMsg);
         }
     };
 
@@ -100,16 +96,13 @@ export default function Admin() {
             setPendingUsers((prev) => prev.filter((u: any) => u._id !== id));
         } catch (err) {
             console.error("Error rejecting user:", err);
-            alert("Error al rechazar usuario");
+            const errorMsg = err instanceof Error ? err.message : "Error al rechazar usuario";
+            setError(errorMsg);
         }
     };
 
     return (
         <div className="admin-container">
-            {!token ? (
-                <p className="loading-text">Redirigiendo...</p>
-            ) : (
-                <>
             <h2>Panel de Administración</h2>
 
             <div className="admin-tabs">
@@ -142,6 +135,8 @@ export default function Admin() {
             {activeTab === "pending" && (
                 <div className="tab-content">
                     <h3>Solicitudes Pendientes</h3>
+
+                    {error && <div style={{ color: '#dc3545', padding: '1rem', marginBottom: '1rem' }}>{error}</div>}
 
                     {isLoading && <p className="loading-text">Cargando solicitudes...</p>}
 
@@ -216,8 +211,6 @@ export default function Admin() {
                 <div className="tab-content">
                     <UserStatusHistory token={token} />
                 </div>
-            )}
-            </>
             )}
         </div>
     );
