@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { userService } from "../api/userService";
-import '../styles/AdminTabs.css';
+import './AdminTabs.css';
 
 interface User {
     _id: string;
@@ -55,7 +55,6 @@ export default function ManagedUsers({ token, status, title }: Props) {
 
             await userService.updateUserStatus(userId, newStatus, token, reason);
             setReasonText(prev => ({ ...prev, [userId]: "" }));
-            // Filtrar el usuario del estado local en lugar de recargar
             setUsers(prev => prev.filter(u => u._id !== userId));
         } catch (err) {
             console.error("Error changing status:", err);
