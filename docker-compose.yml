@@ -9,42 +9,22 @@ services:
     networks:
       - school-net
 
-  auth-service:
-    build: ./auth-service
-    container_name: auth-service
-    ports:
-      - "4001:4001"
-    env_file:
-      - ./auth-service/.env
-    depends_on:
-      - users-service
-    networks:
-      - school-net
-
-  users-service:
-    build: ./users-service
-    container_name: users-service
-    ports:
-      - "4002:4002"
-    env_file:
-      - ./users-service/.env
-    depends_on:
-      - mongodb
-    networks:
-      - school-net
-
-  api-gateway:
+  backend:
     build: ./api-gateway
-    container_name: api-gateway
+    container_name: unified-backend
     ports:
       - "4000:4000"
     env_file:
       - ./api-gateway/.env
     depends_on:
-      - auth-service
-      - users-service
+      - mongodb
+      - rabbitmq
     networks:
       - school-net
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/csn
+      - NODE_ENV=production
+      - RABBIT_URL=amqp://rabbitmq:5672
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -54,52 +34,3 @@ services:
     networks:
       - school-net
 
-  content-service:
-    build: ./content-service
-    env_file:
-      - ./content-service/.env
-    depends_on:
-      - rabbitmq
-    networks:
-      - school-net
-
-  storage-service:
-    build: ./storage-service
-    container_name: storage-service
-    env_file:
-      - ./storage-service/.env
-    depends_on:
-      - rabbitmq
-      - mongodb
-    networks:
-      - school-net
-
-  notification-service:
-    build: ./notification-service
-    container_name: notification-service
-    depends_on:
-      - rabbitmq
-    ports:
-      - "4005:4005"
-    env_file:
-      - ./notification-service/.env
-    networks:
-      - school-net
-
-  ws-service:
-    build: ./ws-service
-    environment:
-      - RABBIT_URL=amqp://rabbitmq:5672
-    depends_on:
-      - rabbitmq
-    ports:
-      - "3001:3001"
-    networks:
-      - school-net
-
-volumes:
-  mongo-data:
-
-networks:
-  school-net:
-    driver: bridge

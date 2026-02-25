@@ -1,9 +1,6 @@
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/auth.routes.js";
-import usersRoutes from "./routes/users.routes.js";
-import announcementRoutes from "./routes/announcements.routes.js";
-import notificationsRoutes from "./routes/notifications.routes.js";
+import unifiedRoutes from "./routes/unified.routes.js";
 
 const app = express();
 
@@ -12,12 +9,13 @@ app.use(cors({
         process.env.FRONTEND_URL
     ],
     credentials: true
-}))
+}));
 app.use(express.json());
 
-app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
-app.use("/notifications", notificationsRoutes);
-app.use("/", announcementRoutes); 
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+app.use("/", unifiedRoutes);
 
 export default app;
