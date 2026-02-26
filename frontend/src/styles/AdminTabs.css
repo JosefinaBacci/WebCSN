@@ -49,8 +49,8 @@
 }
 
 .history-container h3 {
-    color: var(--primary);
-    font-size: var(--font-size-xl);
+    color: var(--dark);
+    font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-md);
 }
 
@@ -192,7 +192,7 @@
 
 .managed-users-container h3 {
     color: var(--dark);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-md);
 }
 
