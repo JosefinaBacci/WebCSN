@@ -5,6 +5,10 @@
     font-family: var(--font-family);
 }
 
+.tab-content h3 {
+    margin-bottom: var(--spacing-md);
+}
+
 .admin-container h2 {
     color: var(--primary);
     font-size: var(--font-size-2xl);

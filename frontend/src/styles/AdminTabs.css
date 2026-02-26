@@ -192,7 +192,7 @@
 
 .managed-users-container h3 {
     color: var(--dark);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     margin-bottom: var(--spacing-md);
 }
 
