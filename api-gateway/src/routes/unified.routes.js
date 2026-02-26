@@ -45,7 +45,8 @@ router.get("/announcements", authenticate, getAnnouncementsController);
 router.get("/announcements/:id", authenticate, getAnnouncementController);
 router.delete("/announcements/:id", authenticate, authorize("admin"), deleteAnnouncementController);
 
-// Contact form route (public)
+// Contact form routes
 router.post("/contact-form", contactFormController);
+router.post("/notifications/contact-form", contactFormController);
 
 export default router;
