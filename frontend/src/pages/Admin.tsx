@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import UserStatusHistory from "../components/UserStatusHistory";
-import ManagedUsers from "../components/ManagedUsers";
+import UserStatusHistory from "../features/users/UserStatusHistory";
+import ManagedUsers from "../features/users/ManagedUsers";
 import { userService } from "../api/userService";
 import io from "socket.io-client";
 import './Admin.css';

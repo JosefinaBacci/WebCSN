@@ -21,7 +21,7 @@ export async function connectMongo(uri) {
                     w: 'majority',
                 });
             }
-        }, 30000); 
+        }, 120000); 
         
     } catch (err) {
         console.error("MongoDB connection error:", err.message);

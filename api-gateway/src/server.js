@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import amqp from "amqplib";
 import app from "./app.js";
 import { connectMongo } from "./config/mongo.js";
+import { initRabbit as initRabbitPublisher } from "./rabbit/publisher.js";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb://mongodb:27017/csn";
 const RABBIT_URL = process.env.RABBIT_URL;
 
 await connectMongo(MONGO_URI);
+await initRabbitPublisher().catch(err => console.error("Error inicializando RabbitMQ publisher:", err.message));
 
 const server = http.createServer(app);
 

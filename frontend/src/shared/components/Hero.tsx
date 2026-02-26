@@ -1,5 +1,5 @@
 import "./Hero.css";
-import sunImage from "../images/sun.png";
+import sunImage from "../../images/sun.png";
 
 export default function Hero() {
     return (

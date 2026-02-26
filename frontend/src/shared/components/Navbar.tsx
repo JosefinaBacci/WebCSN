@@ -1,8 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { useState } from "react";
-import { useEffect } from "react";
-import logoImage from "../images/logo.png";
+import { useAuth } from "../../context/AuthContext";
+import { useState, useEffect } from "react";
+import logoImage from "../../images/logo.png";
 import "./Navbar.css";
 
 const API_URL = import.meta.env.VITE_API_URL;

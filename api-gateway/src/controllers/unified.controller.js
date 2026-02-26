@@ -13,8 +13,10 @@ import {
     createAnnouncement,
     getAnnouncements,
     getAnnouncementById,
-    deleteAnnouncement
+    deleteAnnouncement,
+    getParentsForAnnouncement
 } from "../services/unified.service.js";
+import { resend } from "../mail/resend.js";
 
 // Auth routes
 export async function loginController(req, res) {
@@ -177,10 +179,31 @@ export async function createAnnouncementController(req, res) {
             return res.status(result.status).json({ message: result.error });
         }
 
+        const announcement = result.announcement;
+        const parents = await getParentsForAnnouncement(announcement);
+        Promise.all(
+            parents.map(user =>
+                resend.emails.send({
+                    from: '"Colegio Nuevo Sol" <colegionuevosolzapala@colegionuevosolzapala.com>',
+                    to: user.email,
+                    subject: `📢 Nuevo comunicado: ${announcement.title}`,
+                    html: `
+                        <h2>${announcement.title}</h2>
+                        <p>${announcement.content}</p>
+                        <p>Fecha: ${new Date(announcement.createdAt).toISOString().split('T')[0]}</p>
+                        <hr />
+                    `
+                }).catch(err => {
+                    console.error(`Error sending to ${user.email}:`, err);
+                })
+            )
+        );
+
         res.status(201).json({
             message: "Announcement created",
-            id: result.announcement.announcementId
+            id: announcement.announcementId
         });
+
     } catch (error) {
         console.error("Create announcement error:", error);
         res.status(500).json({ message: "Error creating announcement" });
@@ -243,16 +266,23 @@ export async function contactFormController(req, res) {
             return res.status(400).json({ message: "Incomplete data" });
         }
 
-        // TODO: Integrate with Resend email service if RESEND_API_KEY is configured
-        // For now, just log the contact form
-        console.log("Contact form submission:", {
-            name,
-            email,
-            phone,
-            level,
-            message,
-            timestamp: new Date().toISOString()
+        const response = await resend.emails.send({
+            from: "Colegio Nuevo Sol <colegionuevosolzapala.com@resend.dev>", 
+            to: "colegionuevosolzapala@gmail.com", 
+            subject: `Nueva consulta web – ${level}`,
+            html: `
+                <h3>Nueva consulta desde la web</h3>
+                <p><strong>Nombre:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Teléfono:</strong> ${phone || "-"}</p>
+                <p><strong>Nivel:</strong> ${level}</p>
+                <p><strong>Mensaje:</strong></p>
+                <p>${message}</p>
+                <p>Enviado: ${new Date().toLocaleString()}</p>
+            `,
         });
+
+        console.log("Resend email response:", response);
 
         res.status(200).json({ ok: true, message: "Contact form submitted successfully" });
     } catch (error) {

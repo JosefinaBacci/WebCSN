@@ -4,6 +4,7 @@ import Announcement from "../models/Announcement.js";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import { signToken } from "../utils/jwt.js";
 import { v4 as uuid } from "uuid";
+import { publish } from "../rabbit/publisher.js";
 
 export async function login(email, password) {
     try {
@@ -105,6 +106,20 @@ export async function getRejectedUsers() {
         return users;
     } catch (error) {
         console.error("GET REJECTED ERROR:", error);
+        throw error;
+    }
+}
+
+export async function getParentsForAnnouncement(announcement) {
+    try {
+        const parents = await User.find({
+            role: "parent",
+            status: "approved"
+        }).select("email profile.name profile.lastname");
+
+        return parents;
+    } catch (error) {
+        console.error("GET PARENTS FOR ANNOUNCEMENT ERROR:", error);
         throw error;
     }
 }
@@ -243,6 +258,20 @@ export async function createAnnouncement(title, content, authorId) {
             content,
             authorId
         });
+
+        try {
+            const eventPayload = {
+                id: announcement.announcementId,
+                title: announcement.title,
+                content: announcement.content,
+                createdAt: announcement.createdAt?.toISOString?.() || new Date().toISOString(),
+                authorId: announcement.authorId
+            };
+
+            publish("announcement.created", eventPayload);
+        } catch (eventError) {
+            console.error("Failed to publish announcement.created event:", eventError.message || eventError);
+        }
 
         return { announcement, status: 201 };
     } catch (error) {

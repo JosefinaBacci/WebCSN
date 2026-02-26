@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { userService } from "../api/userService";
-import '../styles/AdminTabs.css';
+import { userService } from "../../api/userService";
+import '../../styles/AdminTabs.css';
 
 interface HistoryEntry {
     _id: string;

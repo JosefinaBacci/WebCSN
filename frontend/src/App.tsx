@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Announcements from "./pages/Announcements";
 import Admin from "./pages/Admin";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./shared/components/ProtectedRoute";
 
 export default function App() {
   return (
