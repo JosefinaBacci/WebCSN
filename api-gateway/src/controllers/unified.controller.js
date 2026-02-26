@@ -267,7 +267,7 @@ export async function contactFormController(req, res) {
         }
 
         const response = await resend.emails.send({
-            from: "Colegio Nuevo Sol <colegionuevosolzapala.com@resend.dev>", 
+            from: '"Colegio Nuevo Sol" <colegionuevosolzapala@colegionuevosolzapala.com>', 
             to: "colegionuevosolzapala@gmail.com", 
             subject: `Nueva consulta web – ${level}`,
             html: `
