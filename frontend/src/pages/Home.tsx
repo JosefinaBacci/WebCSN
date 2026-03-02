@@ -10,7 +10,6 @@ import img2 from "../images/img2.jpg";
 import img3 from "../images/img3.jpg";
 import img4 from "../images/img4.jpg";
 import img5 from "../images/img5.jpg";
-import img6 from "../images/img6.jpg";
 import img7 from "../images/img7.jpg";
 import img8 from "../images/img8.jpg";
 import img9 from "../images/img9.jpg";
@@ -18,6 +17,23 @@ import img10 from "../images/img10.jpg";
 import img11 from "../images/img11.jpg";
 import img12 from "../images/img12.jpg";
 
+import staff0 from "../images/staff/staff0.png";
+import staff1 from "../images/staff/staff1.png";
+import staff2 from "../images/staff/staff2.png";
+import staff3 from "../images/staff/staff3.png";
+import staff4 from "../images/staff/staff4.png";
+import staff5 from "../images/staff/staff5.png";
+import staff6 from "../images/staff/staff6.png";
+import staff7 from "../images/staff/staff7.png";
+import staff8 from "../images/staff/staff8.png";
+import staff9 from "../images/staff/staff9.png";
+import staff10 from "../images/staff/staff10.png";
+import staff11 from "../images/staff/staff11.png";
+import staff12 from "../images/staff/staff12.png";
+import staff13 from "../images/staff/staff13.png";
+import staff14 from "../images/staff/staff14.png";
+
+import staff from "../images/staff/staff-icon.png";
 
 import maternal from "../images/maternal.jpg";
 import jardin from "../images/jardin.jpg";
@@ -31,56 +47,152 @@ export default function Home() {
         {
             name: "Marianela Ayeray Suárez",
             role: "Propietaria y representante legal",
-            image: img0
+            image: staff1
         },
         {
             name: "Alejandra López",
             role: "Directora",
-            image: img1
+            image: staff0
         },
         {
             name: "Maia Alfaro",
             role: "Secretaria",
-            image: img2
+            image: staff2
         }
     ];
 
     const staffInicial = [
         {
-            name: "Ana Rodríguez",
-            grade: "Nivel Inicial - Sala de 3 años",
-            image: img2
+            name: "Jessica Cañete",
+            grade: "Nivel Inicial - Maternal",
+            image: staff13
         },
         {
-            name: "Lucía Fernández",
-            grade: "Nivel Inicial - Sala de 4 años",
-            image: img3
+            name: "Daiana Campos",
+            grade: "Nivel Inicial - Sala de 2 y 3 años",
+            image: staff14
         },
+        {
+            name: "Araceli Fuentes",
+            grade: "Nivel Inicial - Sala de 4 años",
+            image: staff8
+        },
+        {
+            name: "Mónica Jara",
+            grade: "Nivel Inicial - Sala de 5 años",
+            image: staff11
+        },
+        {
+            name: "Romina Cisterna",
+            grade: "Nivel Inicial - Preceptora",
+            image: staff
+        },
+        {
+            name: "Alejandra Yezzi",
+            grade: "Nivel Inicial - Preceptora",
+            image: staff10
+        }
+
     ];
 
     const staffPrimaria = [
         {
-            name: "Carlos Martínez",
-            grade: "Primaria - 3er grado",
-            image: img4
+            name: "Barbara Flores",
+            grade: "Primaria - 1er grado",
+            image: staff
         },
         {
-            name: "Sofía López",
-            grade: "Primaria - 6to grado",
-            image: img5
+            name: "Carolina Ortega",
+            grade: "Primaria - 2do grado A",
+            image: staff
         },
+        {
+            name: "Macarena Yevenes",
+            grade: "Primaria - 2do grado B",
+            image: staff9
+        },
+        {
+            name: "Verónica García",
+            grade: "Primaria - 3er grado",
+            image: staff
+        },
+        {
+            name: "Alejandra López",
+            grade: "Primaria - 4to grado",
+            image: staff0
+        },
+        {
+            name: "Karina Martinez Aseguín",
+            grade: "Primaria - 5to grado",
+            image: staff5
+        },
+        {
+            name: "Rosa Cerdá",
+            grade: "Primaria - 6to grado",
+            image: staff
+        },
+        {
+            name: "Elvio García",
+            grade: "Primaria - 7mo grado",
+            image: staff7
+        }
     ];
 
     const staffTalleres = [
         {
-            name: "Laura Sánchez",
-            grade: "Taller de Música",
-            image: img6
+            name: "Javier Troncoso",
+            grade: "Música",
+            image: staff6
         },
         {
-            name: "Diego Gómez",
-            grade: "Taller de Informática",
-            image: img0
+            name: "Matías Britos",
+            grade: "Informática",
+            image: staff
+        },
+        {
+            name: "Gabriela Nicastro",
+            grade: "Inglés",
+            image: staff
+        },
+        {
+            name: "Cintia Corradini",
+            grade: "Cocina",
+            image: staff12
+        },
+        {
+            name: "Laura Martínez",
+            grade: "Yoga",
+            image: staff
+        },
+        {
+            name: "Jorge Pino",
+            grade: "Folklore",
+            image: staff
+        },
+        {
+            name: "Rocío Salazar", 
+            grade: "Manualidades y reciclado",
+            image: staff
+        },
+        {
+            name: "Adrían Salas",
+            grade: "Instrumentos musicales",
+            image: staff3
+        },
+        {
+            name: "Yamila Espinosa",
+            grade: "Educación Física",
+            image: staff4
+        },
+        {
+            name: "Agustina ",
+            grade: "Educación Física",
+            image: staff
+        },
+        {
+            name: "Natalia Soria",
+            grade: "Plástica",
+            image: staff
         }
     ];
 
@@ -265,7 +377,7 @@ export default function Home() {
                         </div>
 
                         <div className="staff-subsection">
-                            <h4 className="staff-subtitle">Talleres Especiales</h4>
+                            <h4 className="staff-subtitle">Especiales</h4>
                             <div className="staff-grid">
                                 {staffTalleres.map((teacher) => (
                                     <article key={teacher.name} className="staff-card">
