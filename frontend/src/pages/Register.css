@@ -647,6 +647,14 @@
         gap: var(--spacing-md);
     }
 
+    .child-section .child-row {
+        grid-template-columns: 1fr;
+    }
+
+    .child-section .child-row .form-group:first-child {
+        grid-column: auto;
+    }
+
     .child-section {
         padding: var(--spacing-md);
     }
