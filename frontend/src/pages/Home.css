@@ -202,10 +202,45 @@
         font-size: var(--font-size-xl);
     }
 
+    .special-workshops-card {
+        padding: var(--spacing-md);
+    }
+
+    .special-workshops-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .special-workshops-emoji {
+        font-size: 2.4rem;
+    }
+
+    .special-workshops-header h2,
+    .special-workshops-header .section-subtitle {
+        text-align: left;
+    }
+
+    .special-workshops-list {
+        margin-top: var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
     .staff-card {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        padding: var(--spacing-sm);
+    }
+
+    .staff-image-wrapper {
+        width: 64px;
+        height: 64px;
     }
 
     .staff-section-title {
