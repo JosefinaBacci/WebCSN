@@ -23,6 +23,7 @@ nav.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-xl);
 }
 
 .navbar-logo {
@@ -70,7 +71,7 @@ nav.navbar {
 .navbar-menu {
     display: flex;
     list-style: none;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-xl);
     margin: 0;
     padding: 0;
     flex: 1;
