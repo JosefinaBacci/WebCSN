@@ -148,6 +148,25 @@
     box-sizing: border-box;
 }
 
+.phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phone-prefix {
+    padding: 0.8rem 0.9rem;
+    background-color: var(--gray);
+    border-radius: 0.5rem;
+    border: 2px solid var(--gray-light);
+    font-size: var(--font-size-sm);
+    color: var(--dark);
+}
+
+.phone-input-wrapper input {
+    flex: 1;
+}
+
 .child-section .form-group input,
 .child-section .form-group select {
     padding: var(--spacing-sm);
@@ -231,6 +250,14 @@
 
 .child-section .form-row {
     margin-bottom: 0;
+}
+
+.child-section .child-row {
+    grid-template-columns: 1fr 1fr;
+}
+
+.child-section .child-row .form-group:first-child {
+    grid-column: 1 / -1;
 }
 
 /* Botones */

@@ -8,12 +8,13 @@ export default function Register() {
     const [formData, setFormData] = useState({
         role: "parent",
         email: "",
+        phone: "",
         password: "",
         confirmPassword: "",
         profile: {
             name: "",
             lastname: "",
-            children: [{ name: "", grade: "" }]
+            children: [{ name: "", level: "", grade: "" }]
         }
     });
     const [loading, setLoading] = useState(false);
@@ -41,13 +42,19 @@ export default function Register() {
         }
     };
 
-    const handleChildChange = (index: number, field: "name" | "grade", value: string) => {
+    const handleChildChange = (index: number, field: "name" | "level" | "grade", value: string) => {
         setFormData(prev => ({
             ...prev,
             profile: {
                 ...prev.profile,
                 children: prev.profile.children.map((child, i) =>
-                    i === index ? { ...child, [field]: value } : child
+                    i === index
+                        ? {
+                            ...child,
+                            [field]: value,
+                            ...(field === "level" ? { grade: "" } : {})
+                        }
+                        : child
                 )
             }
         }));
@@ -58,7 +65,7 @@ export default function Register() {
             ...prev,
             profile: {
                 ...prev.profile,
-                children: [...prev.profile.children, { name: "", grade: "" }]
+                children: [...prev.profile.children, { name: "", level: "", grade: "" }]
             }
         }));
     };
@@ -91,8 +98,13 @@ export default function Register() {
             return;
         }
 
-        if (!formData.profile.children.every(child => child.name && child.grade)) {
-            setError("Completa el nombre y grado de todos los hijos");
+        if (!formData.phone.trim()) {
+            setError("El teléfono es obligatorio");
+            return;
+        }
+
+        if (!formData.profile.children.every(child => child.name && (child as any).level && child.grade)) {
+            setError("Completa el nombre, nivel y grado de todos los hijos");
             return;
         }
 
@@ -106,6 +118,7 @@ export default function Register() {
                 profile: {
                     name: formData.profile.name,
                     lastname: formData.profile.lastname,
+                    phone: formData.phone.trim(),
                     children: formData.profile.children
                 }
             };
@@ -160,7 +173,7 @@ export default function Register() {
                                 {error && <div className="error-message">{error}</div>}
 
                                 <form onSubmit={handleSubmit} className="register-form">
-                            {/* Email y Contraseña */}
+                            {/* Email y Teléfono */}
                             <div className="form-row">
                                 <div className="form-group">
                                     <label htmlFor="email">Email *</label>
@@ -171,6 +184,18 @@ export default function Register() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="tu@email.com"
+                                        required
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="phone">Teléfono *</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        placeholder="+54 (2942) 123-456"
                                         required
                                     />
                                 </div>
@@ -236,7 +261,7 @@ export default function Register() {
                             {/* Hijos */}
                             <h3 className="form-section-title">Hijos/as</h3>
 
-                            {formData.profile.children.map((child, index) => (
+                            {formData.profile.children.map((child: any, index) => (
                                 <div key={index} className="child-section">
                                     <div className="child-header">
                                         <h4>Hijo/a</h4>
@@ -252,7 +277,7 @@ export default function Register() {
                                         )}
                                     </div>
 
-                                    <div className="form-row">
+                                    <div className="form-row child-row">
                                         <div className="form-group">
                                             <label htmlFor={`child-name-${index}`}>Nombre *</label>
                                             <input
@@ -265,21 +290,47 @@ export default function Register() {
                                             />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor={`child-grade-${index}`}>Grado *</label>
+                                            <label htmlFor={`child-level-${index}`}>Nivel *</label>
                                             <select
-                                                id={`child-grade-${index}`}
-                                                value={child.grade}
-                                                onChange={(e) => handleChildChange(index, "grade", e.target.value)}
+                                                id={`child-level-${index}`}
+                                                value={child.level || ""}
+                                                onChange={(e) => handleChildChange(index, "level", e.target.value)}
                                                 required
                                             >
-                                                <option value="">Selecciona grado</option>
-                                                <option value="1">1°</option>
-                                                <option value="2">2°</option>
-                                                <option value="3">3°</option>
-                                                <option value="4">4°</option>
-                                                <option value="5">5°</option>
-                                                <option value="6">6°</option>
-                                                <option value="7">7°</option>
+                                                <option value="">Selecciona nivel</option>
+                                                <option value="inicial">Inicial</option>
+                                                <option value="primaria">Primaria</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor={`child-grade-${index}`}>Sala / Grado *</label>
+                                            <select
+                                                id={`child-grade-${index}`}
+                                                value={child.grade || ""}
+                                                onChange={(e) => handleChildChange(index, "grade", e.target.value)}
+                                                required
+                                                disabled={!child.level}
+                                            >
+                                                <option value="">Selecciona opción</option>
+                                                {child.level === "inicial" && (
+                                                    <>
+                                                        <option value="maternal">Maternal</option>
+                                                        <option value="sala3">Sala de 3</option>
+                                                        <option value="sala4">Sala de 4</option>
+                                                        <option value="sala5">Sala de 5</option>
+                                                    </>
+                                                )}
+                                                {child.level === "primaria" && (
+                                                    <>
+                                                        <option value="1">1°</option>
+                                                        <option value="2">2°</option>
+                                                        <option value="3">3°</option>
+                                                        <option value="4">4°</option>
+                                                        <option value="5">5°</option>
+                                                        <option value="6">6°</option>
+                                                        <option value="7">7°</option>
+                                                    </>
+                                                )}
                                             </select>
                                         </div>
                                     </div>

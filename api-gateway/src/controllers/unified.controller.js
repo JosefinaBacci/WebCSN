@@ -166,14 +166,14 @@ export async function updateUserStatusController(req, res) {
 // Announcements controllers
 export async function createAnnouncementController(req, res) {
     try {
-        const { title, content } = req.body;
+        const { title, content, grade } = req.body;
         const authorId = req.user?.sub;
 
         if (!title || !content) {
             return res.status(400).json({ message: "Title and content are required" });
         }
 
-        const result = await createAnnouncement(title, content, authorId);
+        const result = await createAnnouncement(title, content, authorId, grade);
         
         if (result.error) {
             return res.status(result.status).json({ message: result.error });
@@ -181,6 +181,23 @@ export async function createAnnouncementController(req, res) {
 
         const announcement = result.announcement;
         const parents = await getParentsForAnnouncement(announcement);
+
+        const formatGradeLabel = (g) => {
+            const map = {
+                maternal: "Maternal",
+                sala3: "Sala de 3",
+                sala4: "Sala de 4",
+                sala5: "Sala de 5",
+                "1": "1° grado",
+                "2": "2° grado",
+                "3": "3° grado",
+                "4": "4° grado",
+                "5": "5° grado",
+                "6": "6° grado",
+                "7": "7° grado",
+            };
+            return map[g] || g;
+        };
         Promise.all(
             parents.map(user =>
                 resend.emails.send({
@@ -190,6 +207,7 @@ export async function createAnnouncementController(req, res) {
                     html: `
                         <h2>${announcement.title}</h2>
                         <p>${announcement.content}</p>
+                        ${announcement.grade ? `<p><strong>Destinatarios:</strong> ${formatGradeLabel(announcement.grade)}</p>` : ""}
                         <p>Fecha: ${new Date(announcement.createdAt).toISOString().split('T')[0]}</p>
                         <hr />
                     `

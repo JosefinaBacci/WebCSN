@@ -144,6 +144,11 @@ export default function Navbar() {
                         </button>
                     </li>
                     <li>
+                        <button onClick={() => scrollToSection("staff")}>
+                            Staff
+                        </button>
+                    </li>
+                    <li>
                         <button onClick={() => scrollToSection("maternal")}>
                             Educación
                         </button>

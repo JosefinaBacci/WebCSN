@@ -8,6 +8,10 @@ const AnnouncementSchema = new mongoose.Schema({
     },
     title: String,
     content: String,
+    grade: {
+        type: String,
+        default: undefined
+    },
     createdAt: {
         type: Date,
         default: Date.now

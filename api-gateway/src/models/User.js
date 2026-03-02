@@ -32,6 +32,7 @@ const UserSchema = new mongoose.Schema({
     profile: {
         name: String,
         lastname: String,
+        phone: String,
         children: [ChildSchema]
     }
 }, { timestamps: true });

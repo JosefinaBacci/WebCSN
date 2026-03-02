@@ -60,7 +60,34 @@ export async function startConsumer() {
 
                 const users = usersResponse.data;
 
-                for (const user of users) {
+                const targetGrade = announcement.grade;
+
+                const recipients = targetGrade
+                    ? users.filter(user => {
+                        const children = user.profile?.children || [];
+                        if (!Array.isArray(children)) return false;
+                        return children.some(child => child && child.grade === targetGrade);
+                    })
+                    : users;
+
+                const formatGradeLabel = (grade) => {
+                    const map = {
+                        maternal: "Maternal",
+                        sala3: "Sala de 3",
+                        sala4: "Sala de 4",
+                        sala5: "Sala de 5",
+                        "1": "1° grado",
+                        "2": "2° grado",
+                        "3": "3° grado",
+                        "4": "4° grado",
+                        "5": "5° grado",
+                        "6": "6° grado",
+                        "7": "7° grado",
+                    };
+                    return map[grade] || grade;
+                };
+
+                for (const user of recipients) {
                     try {
                         await resend.emails.send({
                             from: '"Colegio Nuevo Sol" <colegionuevosolzapala@gmail.com>',
@@ -69,6 +96,7 @@ export async function startConsumer() {
                             html: `
                             <h2>${announcement.title}</h2>
                             <p>${announcement.content}</p>
+                            ${targetGrade ? `<p><strong>Destinatarios:</strong> ${formatGradeLabel(targetGrade)}</p>` : ""}
                             <p>Fecha: ${new Date(announcement.createdAt).toLocaleDateString()}</p>
                             <hr />
                             `,

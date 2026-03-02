@@ -3,7 +3,7 @@ import { publish } from "../rabbit/publisher.js";
 
 export async function create(req, res) {
     try {
-        const { title, content } = req.body;
+        const { title, content, grade } = req.body;
 
         const authorId = req.headers["x-user-id"];
 
@@ -19,6 +19,7 @@ export async function create(req, res) {
             id: uuid(),
             title,
             content,
+            grade: grade || undefined,
             createdAt: new Date().toISOString(),
             authorId
         };

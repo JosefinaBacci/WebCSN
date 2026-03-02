@@ -25,8 +25,25 @@ export default function Announcements() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedAnnouncement, setSelectedAnnouncement] = useState<Announcement | null>(null);
     const [showCreateModal, setShowCreateModal] = useState(false);
-    const [formData, setFormData] = useState({ title: "", content: "" });
+    const [formData, setFormData] = useState({ title: "", content: "", grade: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const formatGradeLabel = (grade: string) => {
+        const map: Record<string, string> = {
+            maternal: "Maternal",
+            sala3: "Sala de 3",
+            sala4: "Sala de 4",
+            sala5: "Sala de 5",
+            "1": "1° grado",
+            "2": "2° grado",
+            "3": "3° grado",
+            "4": "4° grado",
+            "5": "5° grado",
+            "6": "6° grado",
+            "7": "7° grado",
+        };
+        return map[grade] || grade;
+    };
 
     useEffect(() => {
         if (!token) {
@@ -131,7 +148,7 @@ export default function Announcements() {
             });
 
             if (response.ok) {
-                setFormData({ title: "", content: "" });
+                setFormData({ title: "", content: "", grade: "" });
                 setShowCreateModal(false);
             } else {
                 alert("Error al crear el anuncio");
@@ -176,7 +193,7 @@ export default function Announcements() {
                                 <div className="announcement-header-card">
                                     <h2>{announcement.title}</h2>
                                     {announcement.grade && (
-                                        <span className="grade-badge">{announcement.grade}</span>
+                                        <span className="grade-badge">{formatGradeLabel(announcement.grade)}</span>
                                     )}
                                 </div>
                                 <p className="announcement-content">
@@ -229,7 +246,7 @@ export default function Announcements() {
                         <div className="modal-header">
                             <h2>{selectedAnnouncement.title}</h2>
                             {selectedAnnouncement.grade && (
-                                <span className="grade-badge">{selectedAnnouncement.grade}</span>
+                                <span className="grade-badge">{formatGradeLabel(selectedAnnouncement.grade)}</span>
                             )}
                         </div>
                         <p className="modal-content-text">{selectedAnnouncement.content}</p>
@@ -259,6 +276,28 @@ export default function Announcements() {
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     disabled={isSubmitting}
                                 />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="grade">Sala / Grado destinatario (opcional)</label>
+                                <select
+                                    id="grade"
+                                    value={formData.grade}
+                                    onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+                                    disabled={isSubmitting}
+                                >
+                                    <option value="">Todos los niveles</option>
+                                    <option value="maternal">Maternal</option>
+                                    <option value="sala3">Sala de 3</option>
+                                    <option value="sala4">Sala de 4</option>
+                                    <option value="sala5">Sala de 5</option>
+                                    <option value="1">1° grado</option>
+                                    <option value="2">2° grado</option>
+                                    <option value="3">3° grado</option>
+                                    <option value="4">4° grado</option>
+                                    <option value="5">5° grado</option>
+                                    <option value="6">6° grado</option>
+                                    <option value="7">7° grado</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="content">Contenido</label>

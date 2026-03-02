@@ -112,10 +112,16 @@ export async function getRejectedUsers() {
 
 export async function getParentsForAnnouncement(announcement) {
     try {
-        const parents = await User.find({
+        const query = {
             role: "parent",
             status: "approved"
-        }).select("email profile.name profile.lastname");
+        };
+
+        if (announcement?.grade) {
+            query["profile.children"] = { $elemMatch: { grade: announcement.grade } };
+        }
+
+        const parents = await User.find(query).select("email profile.name profile.lastname profile.children");
 
         return parents;
     } catch (error) {
@@ -248,7 +254,7 @@ export async function getAllStatusHistory(page = 1, limit = 20) {
     }
 }
 
-export async function createAnnouncement(title, content, authorId) {
+export async function createAnnouncement(title, content, authorId, grade) {
     try {
         const announcementId = uuid();
         
@@ -256,7 +262,8 @@ export async function createAnnouncement(title, content, authorId) {
             announcementId,
             title,
             content,
-            authorId
+            authorId,
+            grade: grade || undefined
         });
 
         try {
@@ -264,6 +271,7 @@ export async function createAnnouncement(title, content, authorId) {
                 id: announcement.announcementId,
                 title: announcement.title,
                 content: announcement.content,
+                grade: announcement.grade,
                 createdAt: announcement.createdAt?.toISOString?.() || new Date().toISOString(),
                 authorId: announcement.authorId
             };

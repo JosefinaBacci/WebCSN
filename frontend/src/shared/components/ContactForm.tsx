@@ -130,7 +130,7 @@ export default function ContactForm() {
                             onChange={handleChange}
                             required
                         >
-                            <option value="">Selecciona un nivel</option>
+                            <option value="">Selecciona nivel</option>
                             <option value="maternal">Maternal</option>
                             <option value="jardin">Jardín</option>
                             <option value="primaria">Primaria</option>

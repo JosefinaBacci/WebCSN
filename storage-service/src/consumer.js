@@ -52,6 +52,7 @@ export async function startStorageConsumer(rabbitUrl) {
                     announcementId: data.id,
                     title: data.title,
                     content: data.content,
+                    grade: data.grade,
                     createdAt: new Date(data.createdAt),
                     authorId: data.authorId,
                 });
