@@ -12,6 +12,8 @@
     animation: slideInHero 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
     overflow: hidden;
+    border-top: 4px solid var(--secondary);
+    border-bottom: 4px solid var(--secondary);
 }
 
 .hero::before {

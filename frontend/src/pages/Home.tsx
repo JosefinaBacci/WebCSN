@@ -15,6 +15,7 @@ import img9 from "../images/img9.jpg";
 import img10 from "../images/img10.jpg";
 import img11 from "../images/img11.jpg";
 import img12 from "../images/img12.jpg";
+import img13 from "../images/img13.jpg";
 
 import staff0 from "../images/staff/staff0.png";
 import staff1 from "../images/staff/staff1.png";
@@ -34,6 +35,7 @@ import staff14 from "../images/staff/staff14.png";
 import staff15 from "../images/staff/staff15.png"
 import staff16 from "../images/staff/staff16.png"
 import staff17 from "../images/staff/staff17.png"
+import staff18 from "../images/staff/staff18.png"
 
 import staff from "../images/staff/staff-icon.png";
 
@@ -43,7 +45,7 @@ import primaria from "../images/primaria.jpg";
 import "./Home.css";
 
 export default function Home() {
-    const carouselImages = [img0, img1, img2, img4, img5, img7, img8, img9, img10, img11, img12];
+    const carouselImages = [img0, img1, img2, img4, img5, img7, img8, img9, img10, img11, img12, img13];
 
     const staffDirectivo = [
         {
@@ -164,7 +166,7 @@ export default function Home() {
         {
             name: "Laura Martínez",
             grade: "Yoga",
-            image: staff
+            image: staff18
         },
         {
             name: "Jorge Pino",
