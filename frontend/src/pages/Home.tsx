@@ -31,6 +31,9 @@ import staff11 from "../images/staff/staff11.png";
 import staff12 from "../images/staff/staff12.png";
 import staff13 from "../images/staff/staff13.png";
 import staff14 from "../images/staff/staff14.png";
+import staff15 from "../images/staff/staff15.png"
+import staff16 from "../images/staff/staff16.png"
+import staff17 from "../images/staff/staff17.png"
 
 import staff from "../images/staff/staff-icon.png";
 
@@ -113,7 +116,7 @@ export default function Home() {
         {
             name: "Verónica García",
             grade: "Primaria - 3er grado",
-            image: staff
+            image: staff15
         },
         {
             name: "Alejandra López",
@@ -128,7 +131,7 @@ export default function Home() {
         {
             name: "Rosa Cerdá",
             grade: "Primaria - 6to grado",
-            image: staff
+            image: staff17
         },
         {
             name: "Elvio García",
@@ -166,7 +169,7 @@ export default function Home() {
         {
             name: "Jorge Pino",
             grade: "Folklore",
-            image: staff
+            image: staff16
         },
         {
             name: "Rocío Salazar", 
@@ -184,7 +187,7 @@ export default function Home() {
             image: staff4
         },
         {
-            name: "Agustina ",
+            name: "Agustina Rodríguez",
             grade: "Educación Física",
             image: staff
         },
