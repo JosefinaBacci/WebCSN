@@ -8,15 +8,14 @@ import img0 from "../images/img0.jpg";
 import img1 from "../images/img1.jpg";
 import img2 from "../images/img2.jpg";
 import img4 from "../images/img4.jpg";
-import img5 from "../images/img5.jpg";
 import img7 from "../images/img7.jpg";
 import img8 from "../images/img8.jpg";
 import img9 from "../images/img9.jpg";
 import img10 from "../images/img10.jpg";
 import img11 from "../images/img11.jpg";
-import img12 from "../images/img12.jpg";
 import img13 from "../images/img13.jpg";
 import img14 from "../images/img14.jpg";
+import img15 from "../images/img15.jpg";
 
 import staff0 from "../images/staff/staff0.png";
 import staff1 from "../images/staff/staff1.png";
@@ -43,8 +42,8 @@ import staff21 from "../images/staff/staff21.png"
 import staff22 from "../images/staff/staff22.png"
 import staff23 from "../images/staff/staff23.png"
 import staff24 from "../images/staff/staff24.png"
-
-import staff from "../images/staff/staff-icon.png";
+import staff25 from "../images/staff/staff25.png"
+import staff26 from "../images/staff/staff26.png"
 
 import maternal from "../images/maternal.jpg";
 import jardin from "../images/jardin.jpg";
@@ -52,7 +51,7 @@ import primaria from "../images/primaria.jpg";
 import "./Home.css";
 
 export default function Home() {
-    const carouselImages = [img0, img1, img2, img4, img5, img7, img8, img9, img10, img11, img12, img13, img14];
+    const carouselImages = [img0, img1, img2, img4, img7, img8, img9, img10, img11,img13, img14, img15];
 
     const staffDirectivo = [
         {
@@ -110,7 +109,7 @@ export default function Home() {
         {
             name: "Barbara Flores",
             grade: "Primaria - 1er grado",
-            image: staff
+            image: staff25
         },
         {
             name: "Carolina Ortega",
@@ -158,7 +157,7 @@ export default function Home() {
         {
             name: "Matías Britos",
             grade: "Informática",
-            image: staff
+            image: staff26
         },
         {
             name: "Gabriela Nicastro",
@@ -166,7 +165,7 @@ export default function Home() {
             image: staff19
         },
         {
-            name: "Cintia Corradini",
+            name: "Cinthia Corradini",
             grade: "Cocina",
             image: staff12
         },
@@ -186,7 +185,7 @@ export default function Home() {
             image: staff23
         },
         {
-            name: "Adrían Salas",
+            name: "Adrián Salas",
             grade: "Instrumentos musicales",
             image: staff3
         },
