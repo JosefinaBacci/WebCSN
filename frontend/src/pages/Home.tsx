@@ -16,6 +16,7 @@ import img10 from "../images/img10.jpg";
 import img11 from "../images/img11.jpg";
 import img12 from "../images/img12.jpg";
 import img13 from "../images/img13.jpg";
+import img14 from "../images/img14.jpg";
 
 import staff0 from "../images/staff/staff0.png";
 import staff1 from "../images/staff/staff1.png";
@@ -45,7 +46,7 @@ import primaria from "../images/primaria.jpg";
 import "./Home.css";
 
 export default function Home() {
-    const carouselImages = [img0, img1, img2, img4, img5, img7, img8, img9, img10, img11, img12, img13];
+    const carouselImages = [img0, img1, img2, img4, img5, img7, img8, img9, img10, img11, img12, img13, img14];
 
     const staffDirectivo = [
         {
