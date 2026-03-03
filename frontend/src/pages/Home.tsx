@@ -37,6 +37,11 @@ import staff15 from "../images/staff/staff15.png"
 import staff16 from "../images/staff/staff16.png"
 import staff17 from "../images/staff/staff17.png"
 import staff18 from "../images/staff/staff18.png"
+import staff19 from "../images/staff/staff19.png"
+import staff20 from "../images/staff/staff20.png"
+import staff21 from "../images/staff/staff21.png"
+import staff22 from "../images/staff/staff22.png"
+import staff23 from "../images/staff/staff23.png"
 
 import staff from "../images/staff/staff-icon.png";
 
@@ -90,7 +95,7 @@ export default function Home() {
         {
             name: "Romina Cisterna",
             grade: "Nivel Inicial - Preceptora",
-            image: staff
+            image: staff20
         },
         {
             name: "Alejandra Yezzi",
@@ -109,7 +114,7 @@ export default function Home() {
         {
             name: "Carolina Ortega",
             grade: "Primaria - 2do grado A",
-            image: staff
+            image: staff21
         },
         {
             name: "Macarena Yevenes",
@@ -157,7 +162,7 @@ export default function Home() {
         {
             name: "Gabriela Nicastro",
             grade: "Inglés",
-            image: staff
+            image: staff19
         },
         {
             name: "Cintia Corradini",
@@ -177,7 +182,7 @@ export default function Home() {
         {
             name: "Rocío Salazar", 
             grade: "Manualidades y reciclado",
-            image: staff
+            image: staff23
         },
         {
             name: "Adrían Salas",
@@ -192,7 +197,7 @@ export default function Home() {
         {
             name: "Agustina Rodríguez",
             grade: "Educación Física",
-            image: staff
+            image: staff22
         },
         {
             name: "Natalia Soria",
