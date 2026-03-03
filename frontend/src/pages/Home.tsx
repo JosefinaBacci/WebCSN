@@ -42,6 +42,7 @@ import staff20 from "../images/staff/staff20.png"
 import staff21 from "../images/staff/staff21.png"
 import staff22 from "../images/staff/staff22.png"
 import staff23 from "../images/staff/staff23.png"
+import staff24 from "../images/staff/staff24.png"
 
 import staff from "../images/staff/staff-icon.png";
 
@@ -202,7 +203,7 @@ export default function Home() {
         {
             name: "Natalia Soria",
             grade: "Plástica",
-            image: staff
+            image: staff24
         }
     ];
 
