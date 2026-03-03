@@ -72,7 +72,7 @@ export default function ContactForm() {
                 <div className="info-card">
                     <div className="info-icon">📞</div>
                     <h4>Teléfono</h4>
-                    <p>+54 2942 674852</p>
+                    <p>+54 2942 337952</p>
                 </div>
                 <div className="info-card">
                     <div className="info-icon">✉️</div>
