@@ -40,7 +40,19 @@
     display: flex;
     justify-content: center;
     gap: var(--spacing-sm);
+    flex-wrap: nowrap;
     margin-top: var(--spacing-md);
+}
+
+@media (max-width: 480px) {
+    .carousel-dots {
+        gap: 0.35rem;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 .dot {
