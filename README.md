@@ -1,98 +1,79 @@
-# WebCSN – School Management & Communication Platform
+# WebCSN – Production School Management & Communication Platform
 
-## Overview
+## 📌 Overview
 
-WebCSN is a full-stack institutional management platform designed to handle user registration workflows, role-based access control, and segmented communication within an educational institution.
+WebCSN is a production-deployed full-stack school management and communication platform currently used by a real educational institution.
 
-The system is built with a modular and scalable architecture, integrating authentication, administrative workflows, and multichannel notifications.
+The system manages user registration workflows, role-based access control, and segmented institutional communication, while being architected with scalability and modularity in mind.
 
-The project is currently deployed in production for demonstration purposes.
+This project was designed not as a demo, but as a real-world system operating under a custom domain with real users and transactional email delivery.
 
 ---
 
-## Project Goals
+## 🎯 Core Objectives
 
 * Manage user registrations with administrative approval workflows.
-* Implement secure Role-Based Access Control (RBAC).
-* Enable segmented institutional announcements.
-* Integrate multichannel notifications (email and WhatsApp in progress).
-* Provide a scalable foundation for future AI-based automation.
+* Enforce secure Role-Based Access Control (RBAC).
+* Enable targeted institutional announcements.
+* Integrate production-ready transactional email.
+* Support asynchronous communication between components.
+* Maintain a microservice-ready architecture while optimizing infrastructure costs.
 
 ---
 
 ## 🏗️ Architecture
 
-The platform follows a modular backend architecture with API Gateway pattern.
+The backend follows an API Gateway pattern with modular, microservice-ready design principles.
 
-### High-Level Components
+### 🔹 High-Level Components
 
-* **Frontend**: React application deployed on Vercel.
-* **API Gateway**: Node.js backend deployed on Render.
-* **Database**: MongoDB.
-* **Containerization**: Docker-based services.
-* **Email Service**: Resend (configured with custom domain).
+* **Frontend:** React application
+* **Backend:** Node.js API Gateway
+* **Database:** MongoDB (cloud-hosted)
+* **Async Communication:** RabbitMQ (where applicable)
+* **Containerization:** Docker
+* **Email Service:** Resend (custom domain configured)
 
-To reduce infrastructure costs, only the API Gateway is deployed publicly. Internally, the architecture is designed to support microservices, but deployment is consolidated for economic efficiency.
-
----
-
-## 📝 Deployment
-
-* **Frontend**: Deployed on Vercel.
-* **Backend (API Gateway)**: Deployed on Render.
-* **Database**: MongoDB.
-* **Custom Domain**: [https://colegionuevosolzapala.com](https://colegionuevosolzapala.com)
-* **Email System**: Resend integrated with the institutional domain.
-
-The system is accessible through a production domain and supports real email delivery.
+Although the current deployment consolidates services for cost efficiency, the internal structure supports separation into independent microservices.
 
 ---
 
-## 🔐 Security
+## 🔐 Security & Access Control
 
-* JWT-based authentication.
-* Role-Based Access Control (RBAC).
-* Protected administrative routes.
-* Backend-level authorization validation.
+* JWT-based authentication
+* Role-Based Access Control (RBAC)
+* Server-side authorization enforcement
+* Protected administrative routes
 
-Roles include:
-
-* Administrator
-* Standard User (e.g., Parent)
+All critical authorization checks are performed on the backend, not solely on the frontend.
 
 ---
 
 ## 🔄 Core Features
 
-### User Management
+### 👤 User & Registration Management
 
-* User registration system.
-* Administrative approval/rejection workflow.
-* Status transitions (Pending → Approved / Rejected).
-* Ability to manually update user status.
+* User self-registration
+* Administrative approval/rejection workflow
+* Registration status lifecycle (Pending → Approved / Rejected)
+* Manual status updates when required
 
-### Announcement System
+### 📢 Announcement System
 
-* Create institutional announcements.
-* Segment announcements by grade.
-* Automatic email distribution to selected recipients.
+* Creation of institutional announcements
+* Segmentation by grade
+* Targeted notification delivery to selected recipients
 
-### Email Integration
+### 📩 Email Integration
 
-* Transactional email system using Resend.
-* Custom domain email configuration.
-* Structured announcement delivery.
+* Transactional email delivery via Resend
+* Custom domain configuration
+* Authenticated email setup (SPF/DKIM/DMARC as required)
 
-### Upcoming WhatsApp Integration
+### 🔁 Asynchronous Processing
 
-* Planned integration with WhatsApp Business API.
-* Multichannel communication expansion.
-
-### Planned AI Integration
-
-* Institutional chatbot for FAQs.
-* Automated responses based on official school information.
-* Future implementation using retrieval-based approach (RAG).
+* RabbitMQ integration for asynchronous communication where applicable
+* Decoupled notification handling
 
 ---
 
@@ -106,15 +87,18 @@ Roles include:
 ### Backend
 
 * Node.js
-* Express (if applicable)
 * API Gateway pattern
 * JWT Authentication
 
 ### Database
 
-* MongoDB
+* MongoDB (cloud-hosted)
 
-### DevOps
+### Messaging
+
+* RabbitMQ
+
+### DevOps & Infrastructure
 
 * Docker
 * Render deployment
@@ -122,96 +106,70 @@ Roles include:
 
 ### External Services
 
-* Resend (Email delivery)
+* Resend (email delivery with institutional domain)
 
 ---
 
-## 📊 Data Model (Conceptual)
+## 🚀 Deployment
 
-Main entities:
+### Frontend
 
-* User
-* Role
-* Registration Request
-* Announcement
-* Grade
+* Deployed on Vercel
+* Connected to the main (or deployment) branch
+* Environment variables configured via Vercel dashboard
 
-Key relationships:
+### Backend (API Gateway)
 
-* A user has a role.
-* Announcements target one or multiple grades.
-* Registration requests have a status lifecycle.
+* Deployed on Render as a Node.js service
+* Connects to MongoDB and Resend using environment variables
 
----
+### Database
 
-## 🚀 Running the Project Locally
+* MongoDB (cloud-hosted)
 
-### 1️⃣ Clone the repository
+### Custom Domain
 
-```
-git clone https://github.com/JosefinaBacci/WebCSN.git
-cd WebCSN
-```
-
-### 2️⃣ Configure environment variables
-
-Create a `.env` file with:
-
-```
-MONGODB_URI=
-JWT_SECRET=
-RESEND_API_KEY=
-DOMAIN=
-```
-
-### 3️⃣ Run with Docker (recommended)
-
-```
-docker-compose up --build
-```
-
-Or run manually:
-
-```
-npm install
-npm run dev
-```
+* Production domain: [https://colegionuevosolzapala.com](https://colegionuevosolzapala.com)
+* Configured with appropriate DNS records
+* Email authentication configured for Resend
 
 ---
 
 ## 📌 Design Decisions
 
-* Centralized API Gateway for cost-efficient deployment.
-* Backend-enforced authorization (not frontend-only).
-* Segmented notification logic to avoid unnecessary mass communication.
-* Architecture prepared for horizontal scaling if microservices are deployed separately.
-* Domain-based email authentication for production realism.
+### Centralized API Gateway
+
+Simplifies public exposure and keeps infrastructure costs low while preserving a modular, microservice-friendly codebase.
+
+### Backend-Enforced Authorization
+
+All critical authorization checks are performed server-side, not only in the frontend.
+
+### Segmented Communication
+
+Announcements and notifications are targeted (e.g., by grade) to avoid unnecessary mass messaging.
+
+### Scalability in Mind
+
+Each service can be separated and scaled independently in the future by changing the deployment topology.
+
+### Production-Realistic Email Setup
+
+Resend is integrated with a custom domain to resemble a real institutional environment.
 
 ---
 
-## 💼 Professional Focus
+## 💼 Professional Scope
 
 This project demonstrates:
 
-* Backend system design.
-* Authentication and authorization strategies.
-* Workflow state management.
-* Third-party API integration.
-* Production deployment configuration.
-* Cost-aware architectural decisions.
-
----
-
-## 📈 Current Status
-
-Active development.
-
-Next improvements:
-
-* WhatsApp Business integration.
-* Automated testing suite.
-* Logging and monitoring improvements.
-* AI-powered institutional assistant.
+* Backend system design and microservice-ready architecture
+* Authentication and authorization strategies (JWT + RBAC)
+* Workflow and state management (registration approval, user statuses)
+* Asynchronous messaging with RabbitMQ
+* Third-party API integration (Resend)
+* Production deployment under a custom domain
+* Cost-aware architectural decision making
 
 ---
 
@@ -219,4 +177,5 @@ Next improvements:
 
 Josefina Bacci
 Full-Stack Developer (Student)
-Developed as a portfolio-oriented professional project.
+
+Developed as a professional, production-oriented portfolio project currently used by a real educational institution.
