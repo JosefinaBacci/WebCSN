@@ -102,43 +102,6 @@ export default function Navbar() {
         );
     }
 
-    const renderBellIcon = () => (
-        hasPendingRequests ? (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-bell-dot"
-            >
-                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
-                <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348" />
-                <circle cx="18" cy="5" r="3" />
-            </svg>
-        ) : (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-bell"
-            >
-                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
-                <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
-            </svg>
-        )
-    );
-
     if(isAdminPage && isLoggedIn && isAdmin) {
         return (
             <nav className="navbar navbar-simple">
@@ -149,20 +112,9 @@ export default function Navbar() {
                         </span>
                         Colegio Nuevo Sol
                     </Link>
-                    <div className="admin-nav-actions">
-                        <span
-                            className="admin-bell-wrapper"
-                            aria-live="polite"
-                            aria-label={hasPendingRequests ? "Hay solicitudes pendientes" : "Sin solicitudes pendientes"}
-                            title={hasPendingRequests ? "Solicitudes pendientes" : "Sin solicitudes"}
-                        >
-                            {renderBellIcon()}
-                            {hasPendingRequests && <span className="admin-bell-dot" aria-hidden="true"></span>}
-                        </span>
-                        <button onClick={handleLogout} className="navbar-logout-btn">
-                            Cerrar Sesión
-                        </button>
-                    </div>
+                    <button onClick={handleLogout} className="navbar-logout-btn">
+                        Cerrar Sesión
+                    </button>
                 </div>
             </nav>
         );
@@ -219,8 +171,30 @@ export default function Navbar() {
                                 to="/admin" 
                                 className="admin-requests-link"
                                 onClick={() => setIsMenuOpen(false)} 
+                                aria-label={!isMenuOpen ? "Ver solicitudes pendientes" : undefined}
                             >
-                                <span className="admin-text">{isMenuOpen ? "Solicitudes" : "🔔"}</span>
+                                {isMenuOpen ? (
+                                    <span className="admin-text">Solicitudes</span>
+                                ) : (
+                                    <span
+                                        className="admin-bell-icon"
+                                        aria-hidden="true"
+                                        title={hasPendingRequests ? "Solicitudes pendientes" : "Sin solicitudes"}
+                                    >
+                                        {hasPendingRequests ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell-dot-icon">
+                                                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                                                <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348" />
+                                                <circle cx="18" cy="5" r="3" />
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell-icon">
+                                                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                                                <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+                                            </svg>
+                                        )}
+                                    </span>
+                                )}
                                 {hasPendingRequests && <span className="notification-dot"></span>}
                             </Link>
                         </li>
