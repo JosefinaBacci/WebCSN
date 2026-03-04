@@ -7,7 +7,6 @@ nav.navbar {
 }
 
 
-
 .navbar.navbar-simple .navbar-container {
     justify-content: space-between;
 }
@@ -20,10 +19,9 @@ nav.navbar {
     max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-md) var(--spacing-lg);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .navbar-logo {
@@ -70,12 +68,11 @@ nav.navbar {
 
 .navbar-menu {
     display: flex;
-    list-style: none;
     gap: var(--spacing-lg);
+    list-style: none;
     margin: 0;
-    padding: 0 clamp(1.5rem, 5vw, 3.5rem);
-    flex: 1;
-    justify-content: center;
+    padding: 0;
+    justify-self: center;  
 }
 
 .navbar-menu button {
