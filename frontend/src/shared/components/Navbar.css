@@ -23,6 +23,7 @@ nav.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .navbar-logo {
@@ -72,11 +73,9 @@ nav.navbar {
     list-style: none;
     gap: var(--spacing-lg);
     margin: 0;
-    padding: 0;
+    padding: 0 clamp(1.5rem, 5vw, 3.5rem);
     flex: 1;
     justify-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
 }
 
 .navbar-menu button {
@@ -150,6 +149,7 @@ nav.navbar {
 @media (max-width: 1280px) {
     .navbar-container {
         padding: var(--spacing-md);
+        gap: var(--spacing-md);
     }
 
     .hamburger {
@@ -165,6 +165,7 @@ nav.navbar {
         flex-direction: column;
         gap: 0;
         justify-content: flex-start;
+        padding: 0;
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
