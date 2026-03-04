@@ -75,6 +75,8 @@ nav.navbar {
     padding: 0;
     flex: 1;
     justify-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .navbar-menu button {
@@ -163,7 +165,6 @@ nav.navbar {
         flex-direction: column;
         gap: 0;
         justify-content: flex-start;
-
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
