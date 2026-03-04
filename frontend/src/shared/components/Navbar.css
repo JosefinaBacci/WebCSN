@@ -34,15 +34,19 @@ nav.navbar {
     z-index: 101;
 }
 
+.admin-icon-link,
 .admin-requests-link {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.admin-requests-link {
+    position: relative;
     min-width: 40px;
 }
 
-.admin-bell-icon {
+.admin-circle-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -54,12 +58,12 @@ nav.navbar {
     transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.admin-bell-icon:hover {
+.admin-circle-icon:hover {
     box-shadow: 0 6px 18px rgba(198, 68, 65, 0.25);
     transform: translateY(-1px);
 }
 
-.admin-bell-icon svg {
+.admin-circle-icon svg {
     width: 22px;
     height: 22px;
 }

@@ -16,6 +16,62 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [hasPendingRequests, setHasPendingRequests] = useState(false);
 
+    const renderBellIcon = () => (
+        hasPendingRequests ? (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-bell-dot-icon"
+            >
+                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348" />
+                <circle cx="18" cy="5" r="3" />
+            </svg>
+        ) : (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-bell-icon"
+            >
+                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+                <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
+            </svg>
+        )
+    );
+
+    const renderMegaphoneIcon = () => (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-megaphone-icon"
+        >
+            <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" />
+            <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" />
+            <path d="M8 6v8" />
+        </svg>
+    );
+
     useEffect(() => {
         if (!token || role !== "admin") return;
 
@@ -160,8 +216,19 @@ export default function Navbar() {
                     </li>
                     {isLoggedIn && (
                         <li>
-                            <Link to="/announcements" onClick={() => setIsMenuOpen(false)}>
-                                Anuncios
+                            <Link
+                                to="/announcements"
+                                onClick={() => setIsMenuOpen(false)}
+                                className={isAdmin ? "admin-icon-link" : undefined}
+                                aria-label={isAdmin && !isMenuOpen ? "Ir a anuncios" : undefined}
+                            >
+                                {isAdmin && !isMenuOpen ? (
+                                    <span className="admin-circle-icon" aria-hidden="true" title="Anuncios">
+                                        {renderMegaphoneIcon()}
+                                    </span>
+                                ) : (
+                                    "Anuncios"
+                                )}
                             </Link>
                         </li>
                     )}
@@ -177,22 +244,11 @@ export default function Navbar() {
                                     <span className="admin-text">Solicitudes</span>
                                 ) : (
                                     <span
-                                        className="admin-bell-icon"
+                                        className="admin-circle-icon"
                                         aria-hidden="true"
                                         title={hasPendingRequests ? "Solicitudes pendientes" : "Sin solicitudes"}
                                     >
-                                        {hasPendingRequests ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell-dot-icon">
-                                                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
-                                                <path d="M11.68 2.009A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673c-.824-.85-1.678-1.731-2.21-3.348" />
-                                                <circle cx="18" cy="5" r="3" />
-                                            </svg>
-                                        ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell-icon">
-                                                <path d="M10.268 21a2 2 0 0 0 3.464 0" />
-                                                <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" />
-                                            </svg>
-                                        )}
+                                        {renderBellIcon()}
                                     </span>
                                 )}
                                 {hasPendingRequests && <span className="notification-dot"></span>}
