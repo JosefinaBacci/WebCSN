@@ -34,6 +34,46 @@ nav.navbar {
     z-index: 101;
 }
 
+.admin-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.admin-bell-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    border: 1px solid rgba(198, 68, 65, 0.3);
+    background-color: rgba(198, 68, 65, 0.08);
+    border-radius: 999px;
+    padding: var(--spacing-xs);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.admin-bell-wrapper:hover {
+    box-shadow: 0 6px 18px rgba(198, 68, 65, 0.25);
+    transform: translateY(-1px);
+}
+
+.admin-bell-wrapper svg {
+    width: 24px;
+    height: 24px;
+}
+
+.admin-bell-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: var(--secondary);
+    animation: pulse 1.6s infinite ease-in-out;
+}
+
 .admin-requests-link {
     position: relative;
     display: inline-flex;
@@ -146,6 +186,10 @@ nav.navbar {
 @media (max-width: 1280px) {
     .navbar-container {
         padding: var(--spacing-md);
+    }
+
+    .admin-nav-actions {
+        gap: var(--spacing-sm);
     }
 
     .hamburger {
@@ -283,6 +327,10 @@ nav.navbar {
 @media (max-width: 480px) {
     .navbar-container {
         padding: var(--spacing-sm);
+    }
+
+    .admin-nav-actions {
+        gap: var(--spacing-xs);
     }
 
     .navbar-logo {

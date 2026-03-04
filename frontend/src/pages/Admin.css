@@ -9,29 +9,6 @@
     margin-bottom: var(--spacing-md);
 }
 
-.requests-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-}
-
-.requests-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--secondary);
-    border: 1px solid rgba(198, 68, 65, 0.25);
-    border-radius: 999px;
-    padding: var(--spacing-xs);
-    background-color: rgba(198, 68, 65, 0.08);
-}
-
-.requests-icon svg {
-    width: 24px;
-    height: 24px;
-}
 
 .admin-container h2 {
     color: var(--primary);
@@ -209,10 +186,6 @@
         flex-direction: column;
     }
 
-    .requests-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 
     .user-info {
         width: 100%;
