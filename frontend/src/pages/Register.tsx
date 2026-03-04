@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import sunImage from "../images/sun.png";
 import "./Register.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -156,7 +157,7 @@ export default function Register() {
                 <div className="register-left">
                     <div className="register-content">
                         <div className="register-logo">
-                            <span className="logo-icon">☀️</span>
+                            <img src={sunImage} alt="Sol Colegio Nuevo Sol" className="logo-icon" />
                             <h1>Colegio Nuevo Sol</h1>
                         </div>
                         <p className="register-subtitle">Únete a Nuestra Comunidad</p>

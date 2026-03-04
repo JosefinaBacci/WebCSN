@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import sunImage from "../images/sun.png";
 import "./Login.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -65,7 +66,7 @@ export default function Login() {
                 <div className="login-left">
                     <div className="login-content">
                         <div className="login-logo">
-                            <span className="logo-icon">☀️</span>
+                            <img src={sunImage} alt="Sol Colegio Nuevo Sol" className="logo-icon" />
                             <h1>Colegio Nuevo Sol</h1>
                         </div>
                         <p className="login-subtitle">Bienvenido de vuelta</p>

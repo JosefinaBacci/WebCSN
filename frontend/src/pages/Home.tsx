@@ -52,6 +52,93 @@ import "./Home.css";
 
 export default function Home() {
     const carouselImages = [img0, img1, img2, img4, img7, img8, img9, img10, img11,img13, img14, img15];
+    const babyIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-baby-icon lucide-baby"
+            style={{ color: "var(--secondary)" }}
+            aria-hidden="true"
+        >
+            <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
+            <path d="M15 12h.01" />
+            <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" />
+            <path d="M9 12h.01" />
+        </svg>
+    );
+    const bookIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-book-open-text-icon lucide-book-open-text"
+            style={{ color: "var(--secondary)" }}
+            aria-hidden="true"
+        >
+            <path d="M12 7v14" />
+            <path d="M16 12h2" />
+            <path d="M16 8h2" />
+            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+            <path d="M6 12h2" />
+            <path d="M6 8h2" />
+        </svg>
+    );
+    const paletteIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-palette-icon lucide-palette"
+            style={{ color: "var(--secondary)" }}
+            aria-hidden="true"
+        >
+            <path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" />
+            <circle cx="13.5" cy="6.5" r="0.5" fill="currentColor" />
+            <circle cx="17.5" cy="10.5" r="0.5" fill="currentColor" />
+            <circle cx="6.5" cy="12.5" r="0.5" fill="currentColor" />
+            <circle cx="8.5" cy="7.5" r="0.5" fill="currentColor" />
+        </svg>
+    );
+    const sparklesIcon = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-sparkles-icon lucide-sparkles"
+            style={{ color: "var(--accent)" }}
+            aria-hidden="true"
+        >
+            <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+            <path d="M20 2v4" />
+            <path d="M22 4h-4" />
+            <circle cx="4" cy="20" r="2" />
+        </svg>
+    );
 
     const staffDirectivo = [
         {
@@ -216,19 +303,19 @@ export default function Home() {
                     <p className="section-subtitle">Tres niveles educativos con excelencia académica</p>
                     <div className="flip-cards-container">
                         <FlipCard 
-                            icon="👶"
+                            icon={babyIcon}
                             title="Maternal" 
                             frontText="Estimulación temprana"
                             backText="Primeros vínculos y desarrollo sensorial en un ambiente seguro y cálido."
                         />
                         <FlipCard 
-                            icon="🎨"
+                            icon={paletteIcon}
                             title="Jardín" 
                             frontText="Juego y creatividad"
                             backText="Aprendizaje a través del juego, desarrollando habilidades sociales."
                         />
                         <FlipCard 
-                            icon="📚"
+                            icon={bookIcon}
                             title="Primaria" 
                             frontText="Educación integral"
                             backText="Formación académica sólida con valores y pensamiento crítico."
@@ -250,7 +337,7 @@ export default function Home() {
                 <div className="section-content">
                     <div className="detailed-cards-container">
                         <SectionCard
-                            icon="👶"
+                            icon={babyIcon}
                             title="Maternal"
                             description="Un espacio seguro y acogedor para los más pequeños"
                             features={[
@@ -262,7 +349,7 @@ export default function Home() {
                             image={maternal}
                         />
                         <SectionCard
-                            icon="🎨"
+                            icon={paletteIcon}
                             title="Jardín"
                             description="Fomentamos la curiosidad a través del juego"
                             features={[
@@ -274,7 +361,7 @@ export default function Home() {
                             image={jardin}
                         />
                         <SectionCard
-                            icon="📚"
+                            icon={bookIcon}
                             title="Primaria"
                             description="Educación integral con excelencia académica"
                             features={[
@@ -293,7 +380,7 @@ export default function Home() {
                 <div className="section-content">
                     <div className="special-workshops-card">
                         <div className="special-workshops-header">
-                            <span className="special-workshops-emoji">🌟</span>
+                            <span className="special-workshops-emoji">{sparklesIcon}</span>
                             <div>
                                 <h2>Talleres especiales</h2>
                                 <p className="section-subtitle">

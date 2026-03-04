@@ -6,8 +6,6 @@ nav.navbar {
     z-index: 100;
 }
 
-
-
 .navbar.navbar-simple .navbar-container {
     justify-content: space-between;
 }

@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import "./FlipCard.css";
 
 interface FlipCardProps {
-    icon: string;
+    icon: ReactNode;
     title: string;
     frontText: string;
     backText: string;

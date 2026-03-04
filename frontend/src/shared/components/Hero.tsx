@@ -10,7 +10,9 @@ export default function Hero() {
                 <button className="hero-btn">Conoce Más</button>
             </div>
             <div className="hero-image">
-                <img src={sunImage} alt="Sol" className="hero-placeholder" />
+                <div className="hero-sun-wrapper">
+                    <img src={sunImage} alt="Sol" className="hero-sun" />
+                </div>
             </div>
         </section>
     );

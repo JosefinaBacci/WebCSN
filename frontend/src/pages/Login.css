@@ -56,8 +56,12 @@
 }
 
 .login-logo .logo-icon {
-    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    display: inline-block;
     animation: bounce 2s ease-in-out infinite, rotateSun 8s linear infinite;
+    filter: drop-shadow(0 6px 12px rgba(255, 226, 121, 0.4));
 }
 
 .login-logo h1 {
@@ -86,6 +90,7 @@
     font-size: 6rem;
     animation: float 3s ease-in-out infinite, rotateSun 8s linear infinite;
     filter: drop-shadow(0 10px 25px rgba(255, 200, 0, 0.3));
+
 }
 
 .login-right {
@@ -447,7 +452,8 @@
     }
 
     .login-logo .logo-icon {
-        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
     }
 
     .login-logo h1 {

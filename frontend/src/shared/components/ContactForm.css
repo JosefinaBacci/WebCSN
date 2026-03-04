@@ -52,6 +52,11 @@
     display: inline-block;
 }
 
+.info-icon svg {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
 .info-card:nth-child(1) .info-icon { animation-delay: 0s; }
 .info-card:nth-child(2) .info-icon { animation-delay: 0.2s; }
 .info-card:nth-child(3) .info-icon { animation-delay: 0.4s; }

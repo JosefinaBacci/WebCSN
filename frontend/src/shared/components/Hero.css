@@ -100,13 +100,26 @@
     animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.hero-placeholder {
+.hero-sun-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 3s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.hero-sun {
     width: 250px;
     height: 250px;
-    animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 10px 25px rgba(255, 226, 121, 0.3));
     object-fit: contain;
     mix-blend-mode: lighten;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+}
+
+.hero-sun-wrapper:hover .hero-sun {
+    transform: rotate(360deg);
 }
 
 @keyframes slideInHero {
@@ -184,7 +197,7 @@
         font-size: 2rem;
     }
 
-    .hero-placeholder {
+    .hero-sun {
         width: 150px;
         height: 150px;
     }

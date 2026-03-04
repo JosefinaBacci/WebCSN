@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import "./SectionCard.css";
 
 interface SectionCardProps {
-    icon: string;
+    icon: ReactNode;
     title: string;
     description: string;
     features: string[];
