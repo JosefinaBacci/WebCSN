@@ -6,6 +6,7 @@ nav.navbar {
     z-index: 100;
 }
 
+
 .navbar.navbar-simple .navbar-container {
     justify-content: space-between;
 }
@@ -17,11 +18,11 @@ nav.navbar {
 .navbar-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--spacing-md) clamp(1.5rem, 6vw, 5rem);
+    padding: var(--spacing-md) var(--spacing-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .navbar-logo {
@@ -31,7 +32,6 @@ nav.navbar {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    margin-right: clamp(1.25rem, 4vw, 3.5rem);
     white-space: nowrap;
     z-index: 101;
 }
@@ -70,12 +70,10 @@ nav.navbar {
 .navbar-menu {
     display: flex;
     list-style: none;
-    gap: clamp(1.5rem, 3vw, 3.5rem);
+    gap: var(--spacing-lg);
     margin: 0;
-    padding: 0 clamp(1.5rem, 7vw, 6rem);
     flex: 1;
     justify-content: center;
-    align-items: center;
 }
 
 .navbar-menu button {
@@ -103,7 +101,6 @@ nav.navbar {
     font-weight: 600;
     transition: all 0.3s ease;
     white-space: nowrap;
-    margin-left: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 .navbar-login-btn:hover {
@@ -122,7 +119,6 @@ nav.navbar {
     border: none;
     cursor: pointer;
     font-size: var(--font-size-base);
-    margin-left: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 .navbar-logout-btn:hover {
@@ -151,7 +147,7 @@ nav.navbar {
 @media (max-width: 1280px) {
     .navbar-container {
         padding: var(--spacing-md);
-        column-gap: var(--spacing-md);
+        gap: var(--spacing-md);
     }
 
     .hamburger {
@@ -168,7 +164,6 @@ nav.navbar {
         gap: 0;
         justify-content: flex-start;
         padding: 0;
-        margin: 0;
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
