@@ -1,10 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
+import io from "socket.io-client";
 import logoImage from "../../images/logo.png";
 import "./Navbar.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
+const WS_URL = import.meta.env.VITE_WS_URL;
 
 export default function Navbar() {
     const { token, role, logout } = useAuth();
@@ -14,7 +16,8 @@ export default function Navbar() {
     const isAnnouncementsPage = pathname === "/announcements";
     const isAdminPage = pathname === "/admin";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [hasPendingRequests, setHasPendingRequests] = useState(false);
+    const [pendingCount, setPendingCount] = useState(0);
+    const hasPendingRequests = pendingCount > 0;
 
     const renderBellIcon = () => (
         hasPendingRequests ? (
@@ -73,7 +76,10 @@ export default function Navbar() {
     );
 
     useEffect(() => {
-        if (!token || role !== "admin") return;
+        if (!token || role !== "admin") {
+            setPendingCount(0);
+            return;
+        }
 
         const fetchPending = async () => {
             try {
@@ -86,13 +92,35 @@ export default function Navbar() {
                 if (!res.ok) return;
 
                 const data = await res.json();
-                setHasPendingRequests(data.length > 0);
+                setPendingCount(Array.isArray(data) ? data.length : 0);
             } catch (err) {
                 console.error("Error fetching pending users", err);
             }
         };
 
         fetchPending();
+    }, [token, role]);
+
+    useEffect(() => {
+        if (!token || role !== "admin") return;
+
+        const socket = io(WS_URL, {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            reconnectionAttempts: 5
+        });
+
+        const incrementPending = () => setPendingCount(prev => prev + 1);
+        const decrementPending = () => setPendingCount(prev => Math.max(prev - 1, 0));
+
+        socket.on("new-pending-user", incrementPending);
+        socket.on("user-approved", decrementPending);
+        socket.on("user-rejected", decrementPending);
+
+        return () => {
+            socket.disconnect();
+        };
     }, [token, role]);
 
 
@@ -249,9 +277,11 @@ export default function Navbar() {
                                         title={hasPendingRequests ? "Solicitudes pendientes" : "Sin solicitudes"}
                                     >
                                         {renderBellIcon()}
+                                        {hasPendingRequests && (
+                                            <span className="notification-dot" aria-hidden="true"></span>
+                                        )}
                                     </span>
                                 )}
-                                {hasPendingRequests && <span className="notification-dot"></span>}
                             </Link>
                         </li>
                     )}

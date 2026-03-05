@@ -55,6 +55,7 @@ nav.navbar {
     border-radius: 999px;
     padding: 0.25rem;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
+    position: relative;
 }
 
 .admin-circle-icon:hover {
@@ -67,13 +68,13 @@ nav.navbar {
 }
 
 .notification-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     background-color: var(--secondary);
     border-radius: 50%;
     position: absolute;
     top: 4px;
-    right: -2px;
+    right: 4px;
     animation: pulse 1.6s infinite ease-in-out;
 }
 
@@ -257,17 +258,6 @@ nav.navbar {
 
     .mobile-logout-btn:hover {
         color: var(--secondary) !important;
-    }
-
-    .admin-requests-link {
-        position: relative;
-    }
-
-    .notification-dot {
-        position: absolute;
-        top: 50%;
-        right: var(--spacing-md);
-        transform: translateY(-50%);
     }
 
     .navbar-logout-btn {
