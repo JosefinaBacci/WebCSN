@@ -38,8 +38,27 @@ export default function ImageCarousel({ images, title }: CarouselProps) {
                     <button
                         key={index}
                         className={`dot ${index === current ? "active" : ""}`}
+                        aria-label={`Ir a la imagen ${index + 1}`}
+                        aria-current={index === current}
                         onClick={() => goToSlide(index)}
-                    />
+                    >
+                        <span className="dot-icon" aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-dot"
+                            >
+                                <circle cx="12.1" cy="12.1" r="1" />
+                            </svg>
+                        </span>
+                    </button>
                 ))}
             </div>
         </div>
