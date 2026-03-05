@@ -9,8 +9,8 @@ const API_URL = import.meta.env.VITE_API_URL;
 export default function Navbar() {
     const { token, role, logout } = useAuth();
     const { pathname } = useLocation();
-    const isLoggedIn = true;
-    const isAdmin = true;
+    const isLoggedIn = !!token;
+    const isAdmin = role === "admin";
     const isAnnouncementsPage = pathname === "/announcements";
     const isAdminPage = pathname === "/admin";
     const [isMenuOpen, setIsMenuOpen] = useState(false);
