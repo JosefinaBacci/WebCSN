@@ -8,20 +8,7 @@ export async function connectMongo(uri) {
             serverSelectionTimeoutMS: 5000,
             socketTimeoutMS: 45000,
         });
-        console.log("Storage service connected to MongoDB");
-        
-        setInterval(async () => {
-            try {
-                await mongoose.connection.db.admin().ping();
-                console.log("MongoDB ping successful");
-            } catch (err) {
-                console.error("MongoDB ping failed, attempting reconnect:", err.message);
-                await mongoose.connect(uri, {
-                    retryWrites: true,
-                    w: 'majority',
-                });
-            }
-        }, 30000); 
+        console.log("Storage service connected to MongoDB"); 
         
     } catch (err) {
         console.error("Mongo connection error", err.message);

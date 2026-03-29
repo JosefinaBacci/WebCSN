@@ -41,10 +41,10 @@ async function healthCheck() {
 
 const INTERVAL = 10 * 60 * 1000;
 
-console.log(`Starting health check every ${INTERVAL / 1000 / 60} minutes...`);
-healthCheck(); 
-
-setInterval(healthCheck, INTERVAL);
+// Health check periódico deshabilitado
+// console.log(`Starting health check every ${INTERVAL / 1000 / 60} minutes...`);
+// healthCheck(); 
+// setInterval(healthCheck, INTERVAL);
 
 process.on('SIGINT', () => {
     console.log('\nHealth check stopped');
